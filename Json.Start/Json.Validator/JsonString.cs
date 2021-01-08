@@ -12,8 +12,9 @@ namespace Json
         private static bool IsWrappedInQuotes(string input)
         {
             const char Quotes = '\"';
+            const int minStringLength = 2;
 
-            return input[0] == Quotes && input[^1] == Quotes;
+            return input.Length >= minStringLength && input[0] == Quotes && input[^1] == Quotes;
         }
     }
 }
