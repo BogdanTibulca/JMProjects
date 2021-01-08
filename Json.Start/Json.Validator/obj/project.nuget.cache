@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "rGz/yl7NRmRpa1MRwaKUvmy67/BPSpyD/4KKYtdcUYPeg49UrPqhHDD7Enobt+aw1MbqKEYHicmAcnaY5UomkA==",
+  "dgSpecHash": "se9ERCSuvzgRTSQ73rwomQhq81ia4JP8EsVrtQr9ASOaeklw/Yxm+KDxG7LfR/1aS83glo4vIamOxOSSjeCb6Q==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Validator\\Json.csproj",
+  "projectFilePath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Validator\\Json.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bogda\\.nuget\\packages\\microsoft.codeanalysis.fxcopanalyzers\\2.9.8\\microsoft.codeanalysis.fxcopanalyzers.2.9.8.nupkg.sha512",
     "C:\\Users\\bogda\\.nuget\\packages\\microsoft.codeanalysis.versioncheckanalyzer\\2.9.8\\microsoft.codeanalysis.versioncheckanalyzer.2.9.8.nupkg.sha512",

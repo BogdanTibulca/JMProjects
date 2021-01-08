@@ -3762,11 +3762,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Validator\\Json.csproj",
+      "projectUniqueName": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Validator\\Json.csproj",
       "projectName": "Json",
-      "projectPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Validator\\Json.csproj",
+      "projectPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Validator\\Json.csproj",
       "packagesPath": "C:\\Users\\bogda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Validator\\obj\\",
+      "outputPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Validator\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bogda\\AppData\\Roaming\\NuGet\\NuGet.Config",

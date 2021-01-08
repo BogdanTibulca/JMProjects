@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "DKnwpk4EzRlTmw6p2dXKdOQWDe48A3P/muQAa+uw9byIGeMpzHt8XZYJj5GV+8UXO4EIBnMiZoVB9lx4r6c0YQ==",
+  "dgSpecHash": "g3ydnhXe77PNPOVTwY88DjRU/ElPvmeid9TYhBD+V1IHj/RU0cUQ+9eDJZiYYcqQdcjREgUyekiNebbhvz6rTA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Facts\\Json.Facts.csproj",
+  "projectFilePath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Facts\\Json.Facts.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\bogda\\.nuget\\packages\\coverlet.collector\\1.2.0\\coverlet.collector.1.2.0.nupkg.sha512",
     "C:\\Users\\bogda\\.nuget\\packages\\microsoft.codecoverage\\16.5.0\\microsoft.codecoverage.16.5.0.nupkg.sha512",

@@ -6,7 +6,9 @@ namespace Json
     {
         public static bool IsJsonString(string input)
         {
-            throw new NotImplementedException();
+            const char Quotes = '\"';
+
+            return input[0] == Quotes && input[^1] == Quotes;
         }
     }
 }

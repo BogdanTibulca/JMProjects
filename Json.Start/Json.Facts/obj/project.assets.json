@@ -4198,11 +4198,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Facts\\Json.Facts.csproj",
+      "projectUniqueName": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Facts\\Json.Facts.csproj",
       "projectName": "Json.Facts",
-      "projectPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Facts\\Json.Facts.csproj",
+      "projectPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Facts\\Json.Facts.csproj",
       "packagesPath": "C:\\Users\\bogda\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Facts\\obj\\",
+      "outputPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Facts\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\bogda\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -4218,8 +4218,8 @@
       "frameworks": {
         "netcoreapp3.1": {
           "projectReferences": {
-            "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Validator\\Json.csproj": {
-              "projectPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\Json.Start\\Json.Validator\\Json.csproj"
+            "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Validator\\Json.csproj": {
+              "projectPath": "C:\\Users\\bogda\\OneDrive\\Desktop\\c#\\JMProjects\\Json.Start\\Json.Validator\\Json.csproj"
             }
           }
         }
