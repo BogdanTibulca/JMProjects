@@ -5,7 +5,7 @@ namespace Json
     public static class JsonString
     {
         const int MinStringLength = 2;
-        const int LastControlCharValue = 32;
+        const int LastControlCharValue = 31;
         const char Quotes = '\"';
 
         public static bool IsJsonString(string input)
