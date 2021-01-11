@@ -24,7 +24,22 @@ namespace Json
         {
             foreach (char ch in input)
             {
-                if (LastControlCharValue - ch >= 0)
+                if (LastControlCharValue - ch >= 0 && !IsValidEscapedCharacter(ch))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool IsValidEscapedCharacter(char ch)
+        {
+            char[] validEscapedCharacters = { '\"' };
+
+            foreach (char escapedCh in validEscapedCharacters)
+            {
+                if (escapedCh == ch)
                 {
                     return true;
                 }
