@@ -5,7 +5,7 @@ namespace Json
     public static class JsonString
     {
         const int MinStringLength = 2;
-        const int LastControlCharValue = 31;
+        const int LastControlCharacter = 31;
         const char Quotes = '\"';
 
         public static bool IsJsonString(string input)
@@ -22,9 +22,10 @@ namespace Json
 
         private static bool ContainsControlCharacters(string input)
         {
-            foreach (char ch in input)
+            for (int i = 0; i < input.Length - 1; i++)
             {
-                if (LastControlCharValue - ch >= 0 && !IsValidEscapedCharacter(ch))
+                if (LastControlCharacter - input[i] > 0 ||
+                    input[i] == '\\' && !IsValidEscapedCharacter(input[i + 1]))
                 {
                     return true;
                 }
@@ -33,13 +34,13 @@ namespace Json
             return false;
         }
 
-        private static bool IsValidEscapedCharacter(char ch)
+        private static bool IsValidEscapedCharacter(char escaped)
         {
-            char[] validEscapedCharacters = { '\"', '\\', '/', '\b' };
+            char[] validChars = { '"' };
 
-            foreach (char escapedCh in validEscapedCharacters)
+            foreach (char ch in validChars)
             {
-                if (escapedCh == ch)
+                if (ch == escaped || char.IsWhiteSpace(escaped))
                 {
                     return true;
                 }
