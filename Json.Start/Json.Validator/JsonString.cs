@@ -36,7 +36,7 @@ namespace Json
 
         private static bool IsValidEscapedCharacter(char escaped)
         {
-            char[] validChars = { '"', '\\', '/', 'b', 'f' };
+            char[] validChars = { '"', '\\', '/', 'b', 'f', 'n' };
 
             foreach (char ch in validChars)
             {
