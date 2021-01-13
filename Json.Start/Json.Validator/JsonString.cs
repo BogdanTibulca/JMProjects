@@ -25,6 +25,11 @@ namespace Json
 
         private static bool ContainsControlCharacters(string input)
         {
+            if (input.IndexOf(ReversedSolidus) == input.Length - MinStringLength)
+            {
+                return true;
+            }
+
             for (int i = 0; i < input.Length - 1; i++)
             {
                 if (LastControlCharacter - input[i] > 0 ||
