@@ -18,17 +18,16 @@ namespace Json
     public static class JsonString
     {
         const int MinStringLength = 2;
+        const int UnicodeCharLength = 4;
         const int LastControlCharacter = 31;
-        const char Quotes = '\"';
         const char ReversedSolidus = '\\';
-        const char UnicodeChar = 'u';
 
         public static bool IsJsonString(string input)
         {
-            return !string.IsNullOrEmpty(input) &&
+            return HasContentWrappedInQuotes(input) &&
                    HasValidUnicodeCharacters(input) &&
-                   !ContainsControlCharacters(input) &&
-                   IsWrappedInQuotes(input);
+                   ContainsValidEscapedCharacters(input) &&
+                   !ContainsControlCharacters(input);
         }
 
         private static bool IsWrappedInQuotes(string input)
@@ -46,15 +45,41 @@ namespace Json
 
         private static bool ContainsControlCharacters(string input)
         {
-            if (input.IndexOf(ReversedSolidus) == input.Length - MinStringLength)
+            foreach (char ch in input)
             {
-                return true;
+                if (ch <= LastControlCharacter)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+        private static bool ContainsValidEscapedCharacters(string input)
+        {
+            if (input.LastIndexOf(ReversedSolidus) == input.Length - MinStringLength &&
+                input[input.Length - MinStringLength - 1] != ReversedSolidus)
+            {
+                return false;
             }
 
             for (int i = 0; i < input.Length - 1; i++)
             {
-                if (LastControlCharacter - input[i] > 0 ||
-                    input[i] == ReversedSolidus && !IsValidEscapedCharacter(input[i + 1]))
+                if (input[i] == ReversedSolidus && !IsValidEscapedCharacter(input[i + 1]))
+                {
+                    return false;
+                }
+            }
+
+            return true;
+        }
+
+        private static bool IsValidEscapedCharacter(char escaped)
+        {
+            foreach (ValidEscapedChars ch in Enum.GetValues(typeof(ValidEscapedChars)))
+            {
+                if ((char)ch == escaped)
                 {
                     return true;
                 }
