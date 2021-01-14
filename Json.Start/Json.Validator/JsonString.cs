@@ -90,26 +90,36 @@ namespace Json
 
         private static bool HasValidUnicodeCharacters(string input)
         {
-            const int UnicodeCharLength = 6;
+            bool hasValidUnicodes = true;
 
-            for (int i = 0; i < input.Length; i++)
+            for (int i = 0; i < input.Length - 1; i++)
             {
-                if (input[i] == ReversedSolidus && input[i + 1] == UnicodeChar)
+                if (HasUnicodeFormat(input, i, i + 1))
                 {
                     if (input.Length - i <= UnicodeCharLength)
                     {
                         return false;
                     }
 
-                    return IsValidUnicode(input.Substring(i + 1, UnicodeCharLength));
+                    if (!IsValidUnicode(input.Substring(i + MinStringLength, UnicodeCharLength)))
+                    {
+                        hasValidUnicodes = false;
+                    }
                 }
             }
 
-            return true;
+            return hasValidUnicodes;
+        }
+
+        private static bool HasUnicodeFormat(string input, int firstIndex, int secondIndex)
+        {
+            return input[firstIndex] == ReversedSolidus && input[secondIndex] == (char)ValidEscapedChars.UnicodeChar;
         }
 
         private static bool IsValidUnicode(string input)
         {
+            bool isValid = true;
+
             for (int i = 0; i < input.Length; i++)
             {
                 if (!char.IsDigit(input[i]) && !char.IsLetter(input[i]))
@@ -117,28 +127,18 @@ namespace Json
                     return false;
                 }
 
-                if (char.IsLetter(input[i]))
+                if (char.IsLetter(input[i]) && !IsValidUnicodeLetter(input[i]))
                 {
-                    return input[i] < 'A' || (input[i] > 'F' && input[i] < 'a') || input[i] > 'f';
+                    isValid = false;
                 }
             }
 
-            return true;
+            return isValid;
         }
 
-        private static bool IsValidEscapedCharacter(char escaped)
+        private static bool IsValidUnicodeLetter(char ch)
         {
-            char[] validChars = { '"', ReversedSolidus, '/', 'b', 'f', 'n', 'r', 't', UnicodeChar };
-
-            foreach (char ch in validChars)
-            {
-                if (ch == escaped || char.IsWhiteSpace(escaped))
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return (ch >= 'A' && ch <= 'F') || (ch >= 'a' && ch <= 'f');
         }
     }
 }
