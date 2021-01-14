@@ -2,6 +2,19 @@ using System;
 
 namespace Json
 {
+    enum ValidEscapedChars
+    {
+        Quotes = '\"',
+        ReversedSolid = '\\',
+        Solidus = '/',
+        UnicodeChar = 'u',
+        Backspace = 'b',
+        FormFeed = 'f',
+        LineFeed = 'n',
+        Carriage = 'r',
+        HorizontalTab = 't'
+    }
+
     public static class JsonString
     {
         const int MinStringLength = 2;
@@ -20,7 +33,15 @@ namespace Json
 
         private static bool IsWrappedInQuotes(string input)
         {
-            return input.Length >= MinStringLength && input[0] == Quotes && input[^1] == Quotes;
+            return input.Length >= MinStringLength &&
+                input[0] == (char)ValidEscapedChars.Quotes &&
+                input[^1] == (char)ValidEscapedChars.Quotes;
+        }
+
+        private static bool HasContentWrappedInQuotes(string input)
+        {
+            return !string.IsNullOrEmpty(input) &&
+                   IsWrappedInQuotes(input);
         }
 
         private static bool ContainsControlCharacters(string input)
