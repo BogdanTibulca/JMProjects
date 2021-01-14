@@ -126,6 +126,12 @@ namespace Json.Facts
         }
 
         [Fact]
+        public void CanEndWithEscapedReverseSolidus()
+        {
+            Assert.True(IsJsonString(Quoted(@"a\\")));
+        }
+
+        [Fact]
         public void DoesNotEndWithAnUnfinishedHexNumber()
         {
             Assert.False(IsJsonString(Quoted(@"a\u")));
