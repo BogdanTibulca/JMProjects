@@ -6,21 +6,20 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            return char.IsDigit(input[0]) &&
-                !ContainsLetters(input);
+            return ContainsOnlyDiggits(input);
         }
 
-        private static bool ContainsLetters(string input)
+        private static bool ContainsOnlyDiggits(string input)
         {
             foreach (char ch in input)
             {
-                if (char.IsLetter(ch))
+                if (!char.IsDigit(ch))
                 {
-                    return true;
+                    return false;
                 }
             }
 
-            return false;
+            return true;
         }
     }
 }
