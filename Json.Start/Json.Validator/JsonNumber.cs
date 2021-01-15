@@ -7,10 +7,15 @@ namespace Json
         public static bool IsJsonNumber(string input)
         {
             return !string.IsNullOrEmpty(input) &&
-                    ContainsOnlyDiggits(input);
+                    IsValidInteger(input);
         }
 
-        private static bool ContainsOnlyDiggits(string input)
+        private static bool IsValidInteger(string input)
+        {
+            return IsValidNegativeInteger(input) || IsValidPositiveInteger(input);
+        }
+
+        private static bool IsValidPositiveInteger(string input)
         {
             if (input[0] == '0' && input.Length > 1)
             {
@@ -26,6 +31,11 @@ namespace Json
             }
 
             return true;
+        }
+
+        private static bool IsValidNegativeInteger(string input)
+        {
+            return input[0] == '-' && IsValidPositiveInteger(input.Substring(1));
         }
     }
 }
