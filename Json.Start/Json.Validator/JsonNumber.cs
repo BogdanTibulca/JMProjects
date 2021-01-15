@@ -12,6 +12,11 @@ namespace Json
 
         private static bool ContainsOnlyDiggits(string input)
         {
+            if (input[0] == '0' && input.Length > 1)
+            {
+                return false;
+            }
+
             foreach (char ch in input)
             {
                 if (!char.IsDigit(ch))
