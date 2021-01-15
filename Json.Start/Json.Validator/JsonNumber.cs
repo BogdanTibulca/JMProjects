@@ -6,13 +6,8 @@ namespace Json
     {
         public static bool IsJsonNumber(string input)
         {
-            return !IsNull(input) &&
+            return !string.IsNullOrEmpty(input) &&
                     ContainsOnlyDiggits(input);
-        }
-
-        private static bool IsNull(string input)
-        {
-            return string.IsNullOrEmpty(input);
         }
 
         private static bool ContainsOnlyDiggits(string input)
