@@ -2,25 +2,17 @@ using System;
 
 namespace Json
 {
-    enum ValidEscapedChars
-    {
-        Quotes = '\"',
-        ReversedSolid = '\\',
-        Solidus = '/',
-        UnicodeChar = 'u',
-        Backspace = 'b',
-        FormFeed = 'f',
-        LineFeed = 'n',
-        Carriage = 'r',
-        HorizontalTab = 't'
-    }
-
     public static class JsonString
     {
         const int MinStringLength = 2;
         const int UnicodeCharLength = 4;
         const int LastControlCharacter = 31;
+
+        const char UnicodeChar = 'u';
+        const char Quotes = '"';
         const char ReversedSolidus = '\\';
+
+        const string ValidEscapedChars = "\"\\/ubfnrt";
 
         public static bool IsJsonString(string input)
         {
@@ -33,8 +25,7 @@ namespace Json
         private static bool IsWrappedInQuotes(string input)
         {
             return input.Length >= MinStringLength &&
-                input[0] == (char)ValidEscapedChars.Quotes &&
-                input[^1] == (char)ValidEscapedChars.Quotes;
+                input[0] == Quotes && input[^1] == Quotes;
         }
 
         private static bool HasContentWrappedInQuotes(string input)
@@ -64,28 +55,30 @@ namespace Json
                 return false;
             }
 
-            for (int i = 0; i < input.Length - 1; i++)
+            int index = 0;
+
+            do
             {
-                if (input[i] == ReversedSolidus && !IsValidEscapedCharacter(input[i + 1]))
+                if (input[index] == ReversedSolidus)
                 {
-                    return false;
+                    if (!IsValidEscapedCharacter(input[index + 1]))
+                    {
+                        return false;
+                    }
+
+                    index++;
                 }
+
+                index++;
             }
+            while (index < input.Length - 1);
 
             return true;
         }
 
         private static bool IsValidEscapedCharacter(char escaped)
         {
-            foreach (ValidEscapedChars ch in Enum.GetValues(typeof(ValidEscapedChars)))
-            {
-                if ((char)ch == escaped)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return ValidEscapedChars.IndexOf(escaped) >= 0;
         }
 
         private static bool HasValidUnicodeCharacters(string input)
@@ -113,7 +106,7 @@ namespace Json
 
         private static bool HasUnicodeFormat(string input, int firstIndex, int secondIndex)
         {
-            return input[firstIndex] == ReversedSolidus && input[secondIndex] == (char)ValidEscapedChars.UnicodeChar;
+            return input[firstIndex] == ReversedSolidus && input[secondIndex] == UnicodeChar;
         }
 
         private static bool IsValidUnicode(string input)
