@@ -74,7 +74,7 @@ namespace Json
 
         private static bool HasValidExponentFormat(string input)
         {
-            if (input.IndexOf(Exponent) < 1)
+            if (input.IndexOf(Exponent) != input.LastIndexOf(Exponent) || input.IndexOf(Exponent) < 1)
             {
                 return false;
             }
