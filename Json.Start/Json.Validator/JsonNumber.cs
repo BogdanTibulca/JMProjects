@@ -5,11 +5,14 @@ namespace Json
     public static class JsonNumber
     {
         const char DecimalSeparator = '.';
+        const char Exponent = 'e';
 
         public static bool IsJsonNumber(string input)
         {
             return !string.IsNullOrEmpty(input) &&
-                    (IsValidInteger(input) || IsValidFractionalNumber(input));
+                    (IsValidInteger(input) ||
+                    IsValidFractionalNumber(input) ||
+                    IsValidNumberWithExponent(input));
         }
 
         private static bool IsValidInteger(string input)
@@ -62,6 +65,16 @@ namespace Json
         {
             return input.IndexOf(DecimalSeparator) != input.Length - 1 &&
                    input.IndexOf(DecimalSeparator) == input.LastIndexOf(DecimalSeparator);
+        }
+
+        private static bool IsValidNumberWithExponent(string input)
+        {
+            return HasValidExponentFormat(input);
+        }
+
+        private static bool HasValidExponentFormat(string input)
+        {
+            return input.IndexOf(Exponent) >= 1;
         }
     }
 }
