@@ -87,7 +87,7 @@ namespace Json
         private static bool IsValidExponent(string input)
         {
             return ContainsOnlyDiggits(input) ||
-                   input[0] == '+' && ContainsOnlyDiggits(input.Substring(1));
+                   (input[0] == '+' || input[0] == '-' && ContainsOnlyDiggits(input.Substring(1)));
         }
     }
 }
