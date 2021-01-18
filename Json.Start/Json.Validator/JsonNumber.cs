@@ -74,7 +74,20 @@ namespace Json
 
         private static bool HasValidExponentFormat(string input)
         {
-            return input.IndexOf(Exponent) >= 1;
+            if (input.IndexOf(Exponent) < 1)
+            {
+                return false;
+            }
+
+            string[] numberParts = input.Split(Exponent);
+
+            return IsValidExponent(numberParts[1]);
+        }
+
+        private static bool IsValidExponent(string input)
+        {
+            return ContainsOnlyDiggits(input) ||
+                   input[0] == '+' && ContainsOnlyDiggits(input.Substring(1));
         }
     }
 }
