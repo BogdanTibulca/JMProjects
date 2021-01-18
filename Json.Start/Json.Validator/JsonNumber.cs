@@ -81,13 +81,19 @@ namespace Json
 
             string[] numberParts = input.Split(Exponent);
 
-            return IsValidExponent(numberParts[1]);
+            return (numberParts[1].Length >= 1) &&
+                IsValidExponent(numberParts[1]);
         }
 
         private static bool IsValidExponent(string input)
         {
+            if (input.Length == 1 && !char.IsDigit(input[0]))
+            {
+                return false;
+            }
+
             return ContainsOnlyDiggits(input) ||
-                   (input[0] == '+' || input[0] == '-' && ContainsOnlyDiggits(input.Substring(1)));
+                  ((input[0] == '+' || input[0] == '-') && ContainsOnlyDiggits(input.Substring(1)));
         }
     }
 }
