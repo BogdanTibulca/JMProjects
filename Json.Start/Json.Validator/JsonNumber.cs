@@ -47,10 +47,20 @@ namespace Json
 
         private static bool IsValidFractionalNumber(string input)
         {
+            if (!HasFractionalFormat(input))
+            {
+                return false;
+            }
+
             string[] numbersParts = input.Split(DecimalSeparator);
 
             return IsValidInteger(numbersParts[0]) &&
                 ContainsOnlyDiggits(numbersParts[1]);
+        }
+
+        private static bool HasFractionalFormat(string input)
+        {
+            return input.IndexOf(DecimalSeparator) != input.Length - 1;
         }
     }
 }
