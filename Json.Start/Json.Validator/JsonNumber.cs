@@ -10,9 +10,14 @@ namespace Json
         public static bool IsJsonNumber(string input)
         {
             return !string.IsNullOrEmpty(input) &&
-                    (IsValidInteger(input) ||
-                    IsValidFractionalNumber(input) ||
-                    IsValidNumberWithExponent(input));
+                    IsValidNumber(input);
+        }
+
+        private static bool IsValidNumber(string input)
+        {
+            return IsValidInteger(input) ||
+                   IsValidFractionalNumber(input) ||
+                   IsValidNumberWithExponent(input);
         }
 
         private static bool IsValidInteger(string input)
@@ -30,6 +35,11 @@ namespace Json
             return ContainsOnlyDiggits(input);
         }
 
+        private static bool IsValidNegativeInteger(string input)
+        {
+            return input[0] == '-' && IsValidPositiveInteger(input.Substring(1));
+        }
+
         private static bool ContainsOnlyDiggits(string input)
         {
             foreach (char ch in input)
@@ -41,11 +51,6 @@ namespace Json
             }
 
             return true;
-        }
-
-        private static bool IsValidNegativeInteger(string input)
-        {
-            return input[0] == '-' && IsValidPositiveInteger(input.Substring(1));
         }
 
         private static bool IsValidFractionalNumber(string input)
