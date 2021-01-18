@@ -24,6 +24,11 @@ namespace Json
                 return false;
             }
 
+            return ContainsOnlyDiggits(input);
+        }
+
+        private static bool ContainsOnlyDiggits(string input)
+        {
             foreach (char ch in input)
             {
                 if (!char.IsDigit(ch))
@@ -45,7 +50,7 @@ namespace Json
             string[] numbersParts = input.Split(DecimalSeparator);
 
             return IsValidInteger(numbersParts[0]) &&
-                IsValidPositiveInteger(numbersParts[1]);
+                ContainsOnlyDiggits(numbersParts[1]);
         }
     }
 }
