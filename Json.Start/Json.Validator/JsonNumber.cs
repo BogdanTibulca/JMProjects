@@ -69,7 +69,7 @@ namespace Json
 
         private static bool IsValidNumberWithExponent(string input)
         {
-            return HasValidExponentFormat(input);
+            return HasValidExponentFormat(input.ToLower());
         }
 
         private static bool HasValidExponentFormat(string input)
