@@ -60,7 +60,8 @@ namespace Json
 
         private static bool HasFractionalFormat(string input)
         {
-            return input.IndexOf(DecimalSeparator) != input.Length - 1;
+            return input.IndexOf(DecimalSeparator) != input.Length - 1 &&
+                   input.IndexOf(DecimalSeparator) == input.LastIndexOf(DecimalSeparator);
         }
     }
 }
