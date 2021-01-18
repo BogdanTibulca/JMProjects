@@ -82,7 +82,8 @@ namespace Json
             string[] numberParts = input.Split(Exponent);
 
             return (numberParts[1].Length >= 1) &&
-                IsValidExponent(numberParts[1]);
+                IsValidExponent(numberParts[1]) &&
+                input.IndexOf(Exponent) > input.IndexOf(DecimalSeparator);
         }
 
         private static bool IsValidExponent(string input)
