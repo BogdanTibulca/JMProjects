@@ -128,6 +128,12 @@ namespace Json.Facts
         }
 
         [Fact]
+        public void TheExponentMustBePrecededByANumber()
+        {
+            Assert.False(IsJsonNumber("3xe+33"));
+        }
+
+        [Fact]
         public void DoesNotHaveTwoExponents()
         {
             Assert.False(IsJsonNumber("22e323e33"));

@@ -86,6 +86,11 @@ namespace Json
 
             string[] numberParts = input.Split(Exponent);
 
+            if (!char.IsDigit(numberParts[0][^1]))
+            {
+                return false;
+            }
+
             return (numberParts[1].Length >= 1) &&
                 IsValidExponent(numberParts[1]) &&
                 input.IndexOf(Exponent) > input.IndexOf(DecimalSeparator);
