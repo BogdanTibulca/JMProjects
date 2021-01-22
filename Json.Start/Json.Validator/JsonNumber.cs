@@ -86,7 +86,7 @@ namespace Json
 
             string[] numberParts = input.Split(Exponent);
 
-            if (!char.IsDigit(numberParts[0][^1]))
+            if (!(IsValidInteger(numberParts[0]) || IsValidFractionalNumber(numberParts[0])))
             {
                 return false;
             }
