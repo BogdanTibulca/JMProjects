@@ -8,47 +8,64 @@ namespace FootballStandings.Facts
         readonly Team teamOne = new Team("T1", 23);
 
         [Fact]
-        public void CompareByPoints_CompareTwoTeamsWithTheSameNumberOfPoints_ShouldReturnTrue()
+        public void HasTheSameNumberOfPointsCompareTwoTeamsWithTheSameNumberOfPointsShouldReturnTrue()
         {      
             Team dummy = new Team("Dummy", 23);
 
-            Assert.True(dummy.CompareByPoints(teamOne));
+            Assert.True(dummy.HasTheSameNumberOfPoints(teamOne));
         }
 
         [Fact]
-        public void CompareByPoints_FirstTeamHasMorePointsThanTheSecondOne_ShouldReturnFalse()
+        public void HasMorePointsThanFirstTeamHasMorePointsThanTheSecondOneShouldReturnFalse()
         {
             Team dummy = new Team("Dummy", 20);
 
-            Assert.False(dummy.CompareByPoints(teamOne));
+            Assert.False(dummy.HasMorePointsThan(teamOne));
         }
 
         [Fact]
-        public void CompareByPoints_SecondTeamHasMorePointsThanTheFirstOne_ShouldReturnTrue()
+        public void HasMorePointsThanSecondTeamHasMorePointsThanTheFirstOneShouldReturnTrue()
         {
             Team dummy = new Team("Dummy", 26);
 
-            Assert.True(dummy.CompareByPoints(teamOne));
+            Assert.True(dummy.HasMorePointsThan(teamOne));
         }
 
         [Fact]
-        public void AddPoints_InvalidPointsPassed_ShouldNotChangeThePoints()
+        public void HasTheSameNameComparedWithATeamWithTheSameNameShouldReturnTrue()
+        {
+            Team teamToCompare = new Team("T1", 26);
+
+            Assert.True(teamOne.HasTheSameName(teamToCompare));
+        }
+
+        [Fact]
+        public void IsTheSameTeamComparedWithATeamWithTheSameDetailsShouldReturnTrue()
+        {
+            Team teamToCompare = new Team("T1", 23);
+
+            Assert.True(teamOne.IsTheSameTeam(teamToCompare));
+        }
+
+        [Fact]
+        public void AddPointsInvalidPointsPassedShouldNotChangeThePoints()
         {
             Team dummy = new Team("Dummy", 23);
 
             teamOne.AddPoints(-1);
 
-            Assert.True(dummy.CompareByPoints(teamOne));
+            Assert.True(dummy.HasTheSameNumberOfPoints(teamOne));
         }
 
         [Fact]
-        public void AddPoints_ValidPointsPassed_ShouldUpdateThePoints()
+        public void AddPointsValidPointsPassedShouldUpdateThePoints()
         {
+            Team team = new Team("T", 26);
             Team dummy = new Team("Dummy", 26);
 
-            teamOne.AddPoints(3);
+            team.AddPoints(3);
 
-            Assert.True(dummy.CompareByPoints(teamOne));
+            Assert.True(team.HasMorePointsThan(dummy));
         }
     }
 }
