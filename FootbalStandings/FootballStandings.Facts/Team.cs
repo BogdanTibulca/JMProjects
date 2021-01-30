@@ -23,11 +23,6 @@
                    this.points == anotherTeam.points ? 0 : 1;
         }
 
-        public bool HasTheSameName(Team anotherTeam)
-        {
-            return this.name.Equals(anotherTeam.name);
-        }
-
         public bool IsTheSameTeam(Team anotherTeam)
         {
             return this.name.Equals(anotherTeam.name) &&

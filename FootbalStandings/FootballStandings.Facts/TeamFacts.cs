@@ -32,14 +32,6 @@ namespace FootballStandings.Facts
         }
 
         [Fact]
-        public void HasTheSameNameComparedWithATeamWithTheSameNameShouldReturnTrue()
-        {
-            Team teamToCompare = new Team("T1", 26);
-
-            Assert.True(teamOne.HasTheSameName(teamToCompare));
-        }
-
-        [Fact]
         public void IsTheSameTeamComparedWithATeamWithTheSameDetailsShouldReturnTrue()
         {
             Team teamToCompare = new Team("T1", 23);
