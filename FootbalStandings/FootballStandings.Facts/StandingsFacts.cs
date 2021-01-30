@@ -137,9 +137,7 @@ namespace FootballStandings.Facts
 
             Team teamToFind = new Team("Not here");
 
-            string expected = $"The team {teamToFind} is not in the standings";
-
-            Assert.Equal(expected, standings.GetTeamRanking(teamToFind));
+            Assert.Equal(-1, standings.GetTeamRanking(teamToFind));
         }
 
         [Fact]
@@ -147,10 +145,9 @@ namespace FootballStandings.Facts
         {
             Standings standings = new Standings(dummyTeams);
 
-            Team teamToFind = new Team("Team One");
-            const string expected = "1";
+            Team teamToFind = new Team("Team One", 33);
 
-            Assert.Equal(expected, standings.GetTeamRanking(teamToFind));
+            Assert.Equal(1, standings.GetTeamRanking(teamToFind));
         }
     }
 }

@@ -17,17 +17,17 @@ namespace FootballStandings.Facts
             return (rank < 1 || rank >= this.teams.Length) ? null : teams[rank - 1];
         }
 
-        public string GetTeamRanking(Team teamToFind)
+        public int GetTeamRanking(Team teamToFind)
         {
             for (int i = 0; i < teams.Length; i++)
             {
-                if (teams[i].HasTheSameName(teamToFind))
+                if (teams[i].IsTheSameTeam(teamToFind))
                 {
-                    return (i + 1).ToString();
+                    return i + 1;
                 }
             }
 
-            return string.Format("The team {0} is not in the standings", teamToFind);
+            return -1;
         }
 
         public Team[] AddTeamInStandings(Team[] teamsToAdd)
