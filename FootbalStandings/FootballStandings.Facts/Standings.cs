@@ -54,7 +54,7 @@ namespace FootballStandings.Facts
                 Team key = teams[i];
                 int j = i - 1;
 
-                while (j >= 0 && key.HasMorePointsThan(teams[j]))
+                while (j >= 0 && key.CompareTo(teams[j]) == 1)
                 {
                     teams[j + 1] = teams[j];
                     j--;

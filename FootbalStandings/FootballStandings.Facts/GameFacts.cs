@@ -45,8 +45,8 @@ namespace FootballStandings.Facts
 
             game.UpdatePoints();
 
-            Assert.True(expectedT1.HasTheSameNumberOfPoints(t1));
-            Assert.True(expectedT2.HasTheSameNumberOfPoints(t2));
+            Assert.Equal(0, expectedT1.CompareTo(t1));
+            Assert.Equal(0, expectedT2.CompareTo(t2));
         }
 
         [Fact]
@@ -60,8 +60,8 @@ namespace FootballStandings.Facts
 
             game.UpdatePoints();
 
-            Assert.True(expectedT1.HasTheSameNumberOfPoints(t1));
-            Assert.True(expectedT2.HasTheSameNumberOfPoints(t2));
+            Assert.Equal(0, expectedT1.CompareTo(t1));
+            Assert.Equal(0, expectedT2.CompareTo(t2));
         }
 
         [Fact]
@@ -75,8 +75,8 @@ namespace FootballStandings.Facts
 
             game.UpdatePoints();
 
-            Assert.True(expectedT1.HasTheSameNumberOfPoints(t1));
-            Assert.True(expectedT2.HasTheSameNumberOfPoints(t2));
+            Assert.Equal(0, expectedT1.CompareTo(t1));
+            Assert.Equal(0, expectedT2.CompareTo(t2));
         }
 
         [Fact]

@@ -17,14 +17,10 @@
             this.points = 0;
         }
 
-        public bool HasMorePointsThan(Team anotherTeam)
+        public int CompareTo(Team anotherTeam)
         {
-            return this.points > anotherTeam.points;
-        }
-
-        public bool HasTheSameNumberOfPoints(Team anotherTeam)
-        {
-            return this.points == anotherTeam.points;
+            return this.points < anotherTeam.points ? -1 :
+                   this.points == anotherTeam.points ? 0 : 1;
         }
 
         public bool HasTheSameName(Team anotherTeam)

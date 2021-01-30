@@ -12,7 +12,7 @@ namespace FootballStandings.Facts
         {      
             Team dummy = new Team("Dummy", 23);
 
-            Assert.True(dummy.HasTheSameNumberOfPoints(teamOne));
+            Assert.Equal(0 ,dummy.CompareTo(teamOne));
         }
 
         [Fact]
@@ -20,7 +20,7 @@ namespace FootballStandings.Facts
         {
             Team dummy = new Team("Dummy", 20);
 
-            Assert.False(dummy.HasMorePointsThan(teamOne));
+            Assert.Equal(-1, dummy.CompareTo(teamOne));
         }
 
         [Fact]
@@ -28,7 +28,7 @@ namespace FootballStandings.Facts
         {
             Team dummy = new Team("Dummy", 26);
 
-            Assert.True(dummy.HasMorePointsThan(teamOne));
+            Assert.Equal(1, dummy.CompareTo(teamOne));
         }
 
         [Fact]
@@ -54,7 +54,7 @@ namespace FootballStandings.Facts
 
             teamOne.AddPoints(-1);
 
-            Assert.True(dummy.HasTheSameNumberOfPoints(teamOne));
+            Assert.Equal(0, dummy.CompareTo(teamOne));
         }
 
         [Fact]
@@ -65,7 +65,7 @@ namespace FootballStandings.Facts
 
             team.AddPoints(3);
 
-            Assert.True(team.HasMorePointsThan(dummy));
+            Assert.Equal(1, team.CompareTo(dummy));
         }
     }
 }
