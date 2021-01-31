@@ -99,35 +99,31 @@ namespace FootballStandings.Facts
         }
 
         [Fact]
-        public void AddTeamInStandingsAddingANewTeamShouldReturnUpdatedStandings()
+        public void AddTeamAddingANewTeamShouldReturnUpdatedStandings()
         {
             Team[] teams = { new Team("Test", 22) };
             Standings standings = new Standings(teams);
 
-            Team[] teamToAdd = { new Team("Team Extra", 35) };
-            Team[] result = standings.AddTeamInStandings(teamToAdd);
+            Team teamToAdd = new Team("Team Extra", 35);
+            standings.AddTeam(teamToAdd);
 
-            Assert.True(result[0].IsTheSameTeam(teamToAdd[0]));
-            Assert.True(result[1].IsTheSameTeam(teams[0]));
+            Assert.Equal(1, standings.GetTeamRanking(teamToAdd));
         }
 
         [Fact]
-        public void AddTeamInStandingsAddingTwoNewTeamShouldReturnUpdatedStandings()
+        public void AddTeamAddingTwoNewTeamShouldReturnUpdatedStandings()
         {
             Team[] teams = { new Team("Test", 22) };
             Standings standings = new Standings(teams);
 
-            Team[] teamToAdd = { new Team("Team Extra", 35),
-                                 new Team("Another One")};
+            Team teamOneToAdd = new Team("Team Extra", 35);
+            Team teamTwoToAdd = new Team("Another One");
 
-            Team[] expected = { new Team("Team Extra", 35),
-                                new Team("Test", 22),
-                                new Team("Another One")};
-            Team[] result = standings.AddTeamInStandings(teamToAdd);
+            standings.AddTeam(teamOneToAdd);
+            standings.AddTeam(teamTwoToAdd);
 
-            Assert.True(expected[0].IsTheSameTeam(result[0]));
-            Assert.True(expected[1].IsTheSameTeam(result[1]));
-            Assert.True(expected[2].IsTheSameTeam(result[2]));
+            Assert.Equal(1, standings.GetTeamRanking(teamOneToAdd));
+            Assert.Equal(3, standings.GetTeamRanking(teamTwoToAdd));
         }
 
         [Fact]

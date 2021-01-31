@@ -9,7 +9,8 @@ namespace FootballStandings.Facts
         public Standings(Team[] teams)
         {
             this.teams = teams;
-            UpdateStandings();
+
+            SortTeamsByPoints(this.teams);
         }
 
         public Team GetTeamByRanking(int rank)
@@ -30,21 +31,16 @@ namespace FootballStandings.Facts
             return -1;
         }
 
-        public Team[] AddTeamInStandings(Team[] teamsToAdd)
+        public void AddTeam(Team teamToAdd)
         {
-            if (teamsToAdd.Length == 0)
-            {
-                return teams;
-            }
+            Team[] newTeams = new Team[this.teams.Length + 1];
+            
+            Array.Copy(this.teams, newTeams, this.teams.Length);
+            newTeams[^1] = teamToAdd;
 
-            int lastElement = this.teams.Length;
+            SortTeamsByPoints(newTeams);
 
-            Array.Resize(ref this.teams, this.teams.Length + teamsToAdd.Length);
-            Array.Copy(teamsToAdd, 0, this.teams, lastElement, teamsToAdd.Length);
-
-            UpdateStandings();
-
-            return teams;
+            this.teams = newTeams;
         }
 
         public void SortTeamsByPoints(Team[] teams)
