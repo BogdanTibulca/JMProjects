@@ -19,11 +19,9 @@ namespace FootballStandings.Facts
             Team[] teams = { new Team("Team One", 33) };
             Standings standings = new Standings(teams);
 
-            Team[] expected = { new Team("Team One", 33) };
+            Team teamToFind = new Team("Team One", 33);
 
-            standings.SortTeamsByPoints(teams);
-
-            Assert.True(teams[0].IsTheSameTeam(expected[0]));
+            Assert.Equal(1, standings.GetTeamRanking(teamToFind));
         }
 
         [Fact]
@@ -36,13 +34,11 @@ namespace FootballStandings.Facts
             };
             Standings standings = new Standings(teams);
 
-            Team[] expected = { new Team("Team One", 33),
-                                new Team("Team Two", 20) };
+            Team teamOne = new Team("Team One", 33);
+            Team teamTwo = new Team("Team Two", 20);
 
-            standings.SortTeamsByPoints(teams);
-
-            Assert.True(teams[0].IsTheSameTeam(expected[0]));
-            Assert.True(teams[1].IsTheSameTeam(expected[1]));
+            Assert.Equal(1, standings.GetTeamRanking(teamOne));
+            Assert.Equal(2, standings.GetTeamRanking(teamTwo));
         }
 
         [Fact]
@@ -52,13 +48,11 @@ namespace FootballStandings.Facts
                             new Team("Team One", 33) };
             Standings standings = new Standings(teams);
 
-            Team[] expected = { new Team("Team One", 33),
-                                new Team("Team Two", 20) };
+            Team teamOne = new Team("Team One", 33);
+            Team teamTwo = new Team("Team Two", 20);
 
-            standings.SortTeamsByPoints(teams);
-
-            Assert.True(teams[0].IsTheSameTeam(expected[0]));
-            Assert.True(teams[1].IsTheSameTeam(expected[1]));
+            Assert.Equal(1, standings.GetTeamRanking(teamOne));
+            Assert.Equal(2, standings.GetTeamRanking(teamTwo));
         }
 
         [Fact]
@@ -66,17 +60,15 @@ namespace FootballStandings.Facts
         {
             Standings standings = new Standings(dummyTeams);
 
-            Team[] expected = { new Team("Team One", 33),
-                                new Team("Team Four", 33),
-                                new Team("Team Three", 29),
-                                new Team("Team Two", 20) };
+            Team teamOne = new Team("Team One", 33);
+            Team teamFour = new Team("Team Four", 33);
+            Team teamThree = new Team("Team Three", 29);
+            Team teamTwo = new Team("Team Two", 20);
 
-            standings.SortTeamsByPoints(dummyTeams);
-
-            Assert.True(dummyTeams[0].IsTheSameTeam(expected[0]));
-            Assert.True(dummyTeams[1].IsTheSameTeam(expected[1]));
-            Assert.True(dummyTeams[2].IsTheSameTeam(expected[2]));
-            Assert.True(dummyTeams[3].IsTheSameTeam(expected[3]));
+            Assert.Equal(1, standings.GetTeamRanking(teamOne));
+            Assert.Equal(2, standings.GetTeamRanking(teamFour));
+            Assert.Equal(3, standings.GetTeamRanking(teamThree));
+            Assert.Equal(4, standings.GetTeamRanking(teamTwo));
         }
 
         [Fact]

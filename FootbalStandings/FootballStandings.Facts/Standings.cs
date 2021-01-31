@@ -43,7 +43,7 @@ namespace FootballStandings.Facts
             this.teams = newTeams;
         }
 
-        public void SortTeamsByPoints(Team[] teams)
+        private void SortTeamsByPoints(Team[] teams)
         {
             for (int i = 1; i < teams.Length; ++i)
             {
