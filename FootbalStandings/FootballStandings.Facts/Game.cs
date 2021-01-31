@@ -7,15 +7,17 @@ namespace FootballStandings.Facts
         private const int WinnerPoints = 3;
         private const int DrawPoints = 1;
         private const int LoserPoints = 0;
-        readonly Team teamOne;
-        readonly Team teamTwo;
-        readonly string result;
+        readonly Team homeTeam;
+        readonly Team visitorTeam;
+        readonly int homeTeamGoals;
+        readonly int visitorTeamGoals;
 
-        public Game(Team teamOne, Team teamTwo, string result)
+        public Game(Team homeTeam, Team visitorTeam, int homeTeamGoals, int visitorTeamGoals)
         {
-            this.teamOne = teamOne;
-            this.teamTwo = teamTwo;
-            this.result = result;
+            this.homeTeam = homeTeam;
+            this.visitorTeam = visitorTeam;
+            this.homeTeamGoals = homeTeamGoals;
+            this.visitorTeamGoals = visitorTeamGoals;
         }
 
         public int GetWinner()
@@ -42,16 +44,16 @@ namespace FootballStandings.Facts
             switch (GetWinner())
             {
                 case 0:
-                    teamOne.AddPoints(DrawPoints);
-                    teamTwo.AddPoints(DrawPoints);
+                    homeTeam.AddPoints(DrawPoints);
+                    visitorTeam.AddPoints(DrawPoints);
                     break;
                 case 1:
-                    teamOne.AddPoints(WinnerPoints);
-                    teamOne.AddPoints(LoserPoints);
+                    homeTeam.AddPoints(WinnerPoints);
+                    visitorTeam.AddPoints(LoserPoints);
                     break;
                 case 2:
-                    teamOne.AddPoints(LoserPoints);
-                    teamTwo.AddPoints(WinnerPoints);
+                    homeTeam.AddPoints(LoserPoints);
+                    visitorTeam.AddPoints(WinnerPoints);
                     return;
             }
         }
