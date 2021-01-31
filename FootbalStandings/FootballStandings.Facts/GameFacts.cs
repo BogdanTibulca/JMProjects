@@ -7,112 +7,38 @@ namespace FootballStandings.Facts
     {
         Team t1 = new Team("Team One", 24);
         Team t2 = new Team("Team Two", 18);
-        [Fact]
-        public void GetWinnerGameEndedWithDrawShouldReturnCorrectResult()
-        {
-            string result = "0 - 0";
-            Game game = new Game(t1, t2, result);
-
-            Assert.Equal(0, game.GetWinner());
-        }
-
-        [Fact]
-        public void GetWinnerFirstTeamWinsShouldReturnCorrectResult()
-        {
-            string result = "2 - 0";
-            Game game = new Game(t1, t2, result);
-
-            Assert.Equal(1, game.GetWinner());
-        }
-
-        [Fact]
-        public void GetWinnerSecondTeamWinsShouldReturnCorrectResult()
-        {
-            string result = "2 - 5";
-            Game game = new Game(t1, t2, result);
-
-            Assert.Equal(2, game.GetWinner());
-        }
 
         [Fact]
         public void UpdatePointsDrawResultShouldReturnPointsUpdatedByOne()
         {
-            string result = "1 - 1";
-            Game game = new Game(t1, t2, result);
-
-            Team expectedT1 = new Team("Team One", 25);
-            Team expectedT2 = new Team("Team One", 19);
+            Game game = new Game(t1, t2, 1, 1);
 
             game.UpdatePoints();
 
-            Assert.Equal(0, expectedT1.CompareTo(t1));
-            Assert.Equal(0, expectedT2.CompareTo(t2));
+            Assert.Equal(0, t1.CompareTo(new Team("Team One", 25)));
+            Assert.Equal(0, t2.CompareTo(new Team("Team Two", 19)));
         }
 
         [Fact]
         public void UpdatePointsFirstTeamWinsShouldReturnPointsCorrectlyUpdated()
         {
-            string result = "2 - 1";
-            Game game = new Game(t1, t2, result);
-
-            Team expectedT1 = new Team("Team One", 27);
-            Team expectedT2 = new Team("Team One", 18);
+            Game game = new Game(t1, t2, 2, 1);
 
             game.UpdatePoints();
 
-            Assert.Equal(0, expectedT1.CompareTo(t1));
-            Assert.Equal(0, expectedT2.CompareTo(t2));
+            Assert.Equal(0, t1.CompareTo(new Team("Team One", 27)));
+            Assert.Equal(0, t2.CompareTo(new Team("Team Two", 18)));
         }
 
         [Fact]
         public void UpdatePointsSecondTeamWinsShouldReturnPointsCorrectlyUpdated()
         {
-            string result = "1 - 2";
-            Game game = new Game(t1, t2, result);
-
-            Team expectedT1 = new Team("Team One", 24);
-            Team expectedT2 = new Team("Team One", 21);
+            Game game = new Game(t1, t2, 1, 2);
 
             game.UpdatePoints();
 
-            Assert.Equal(0, expectedT1.CompareTo(t1));
-            Assert.Equal(0, expectedT2.CompareTo(t2));
-        }
-
-        [Fact]
-        public void IsValidResultResultIsNotSeparatedByMinusShouldReturnFalse()
-        {
-            string result = "1 1";
-            Game game = new Game(t1, t2, result);
-
-            Assert.False(game.IsValidResult(result));
-        }
-
-        [Fact]
-        public void IsValidResultResultStartsWithMinusShouldReturnFalse()
-        {
-            string result = "-1 1";
-            Game game = new Game(t1, t2, result);
-
-            Assert.False(game.IsValidResult(result));
-        }
-
-        [Fact]
-        public void IsValidResultResultHasMoreThanOneMinusShouldReturnFalse()
-        {
-            string result = "1 -- 1";
-            Game game = new Game(t1, t2, result);
-
-            Assert.False(game.IsValidResult(result));
-        }
-
-        [Fact]
-        public void IsValidResultResultDoesNotAllowsCharactersShouldReturnFalse()
-        {
-            string result = "a - 1";
-            Game game = new Game(t1, t2, result);
-
-            Assert.False(game.IsValidResult(result));
+            Assert.Equal(0, t1.CompareTo(new Team("Team One", 24)));
+            Assert.Equal(0, t2.CompareTo(new Team("Team Two", 21)));
         }
     }
 }

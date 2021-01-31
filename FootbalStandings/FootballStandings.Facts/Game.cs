@@ -7,8 +7,10 @@ namespace FootballStandings.Facts
         private const int WinnerPoints = 3;
         private const int DrawPoints = 1;
         private const int LoserPoints = 0;
+
         readonly Team homeTeam;
         readonly Team visitorTeam;
+
         readonly int homeTeamGoals;
         readonly int visitorTeamGoals;
 
