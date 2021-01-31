@@ -137,5 +137,18 @@ namespace FootballStandings.Facts
 
             Assert.Equal(1, standings.GetTeamRanking(teamToFind));
         }
+
+        [Fact]
+        public void UpdateStandingsUpdatesWhenAGameEnds()
+        {
+            Standings standings = new Standings(dummyTeams);
+
+            Game game = new Game(dummyTeams[0], dummyTeams[1], 3, 0);
+
+            standings.Update(game);
+
+            Assert.Equal(0, dummyTeams[0].CompareTo(new Team("Team One", 36)));
+            Assert.Equal(0, dummyTeams[1].CompareTo(new Team("Team Four", 33)));
+        }
     }
 }

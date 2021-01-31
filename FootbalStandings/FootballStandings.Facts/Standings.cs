@@ -60,8 +60,9 @@ namespace FootballStandings.Facts
             }
         }
 
-        public void UpdateStandings()
+        public void Update(Game game)
         {
+            game.UpdatePoints();
             SortTeamsByPoints(this.teams);
         }
     }
