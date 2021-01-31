@@ -20,20 +20,11 @@ namespace FootballStandings.Facts
             this.visitorTeamGoals = visitorTeamGoals;
         }
 
-        public int GetWinner()
+        private int GetWinner()
         {
-            if (!IsValidResult(result))
+            if (this.homeTeamGoals != this.visitorTeamGoals)
             {
-                return -1;
-            }
-
-            string[] goalsScored = result.Split('-');
-            int firstTeamGoals = Convert.ToInt32(goalsScored[0]);
-            int secondTeamGoals = Convert.ToInt32(goalsScored[1]);
-
-            if (firstTeamGoals != secondTeamGoals)
-            {
-                return firstTeamGoals > secondTeamGoals ? 1 : 2;
+                return this.homeTeamGoals > this.visitorTeamGoals ? 1 : 2;
             }
 
             return 0;
@@ -56,32 +47,6 @@ namespace FootballStandings.Facts
                     visitorTeam.AddPoints(WinnerPoints);
                     return;
             }
-        }
-
-        public bool IsValidResult(string result)
-        {
-            if (result.IndexOf('-') <= 0 ||
-               (result.IndexOf('-') != result.LastIndexOf('-')))
-            {
-                return false;
-            }
-
-            string[] goalsScored = result.Split('-');
-
-            return IsValidGoalNumber(goalsScored[0]) && IsValidGoalNumber(goalsScored[1]);
-        }
-
-        public bool IsValidGoalNumber(string goal)
-        {
-            foreach (char ch in goal.Trim())
-            {
-                if (!char.IsDigit(ch))
-                {
-                    return false;
-                }
-            }
-
-            return true;
         }
     }
 }
