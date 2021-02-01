@@ -33,14 +33,10 @@ namespace FootballStandings.Facts
 
         public void AddTeam(Team teamToAdd)
         {
-            Team[] newTeams = new Team[this.teams.Length + 1];
-            
-            Array.Copy(this.teams, newTeams, this.teams.Length);
-            newTeams[^1] = teamToAdd;
+            Array.Resize(ref this.teams, this.teams.Length + 1);
+            this.teams[^1] = teamToAdd;
 
-            SortTeamsByPoints(newTeams);
-
-            this.teams = newTeams;
+            SortTeamsByPoints(this.teams);
         }
 
         private void SortTeamsByPoints(Team[] teams)
