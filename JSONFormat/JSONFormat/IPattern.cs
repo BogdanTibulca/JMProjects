@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JSONFormat
 {
-    interface IPattern
+    public interface IPattern
     {
         public bool Match(string text);
     }

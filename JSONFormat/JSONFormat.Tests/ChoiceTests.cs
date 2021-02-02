@@ -5,8 +5,8 @@ namespace JSONFormat.Tests
 {
     public class ChoiceTests
     {
-        Choice diggit = new Choice(
-            new Character('a'),
+        readonly Choice diggit = new Choice(
+            new Character('0'),
             new Range('1', '9')
             );
 
