@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JSONFormat
 {
-    public class Range
+    public class Range : IPattern
     {
         private readonly char start;
         private readonly char end;
