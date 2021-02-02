@@ -4,7 +4,7 @@ using System.Text;
 
 namespace JSONFormat
 {
-    class Character : IPattern
+    public class Character : IPattern
     {
         readonly char pattern;
 
