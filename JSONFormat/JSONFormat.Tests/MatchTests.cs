@@ -4,68 +4,66 @@ namespace JSONFormat.Tests
 {
     public class MatchTests
     {
-        readonly Match simplePattern = new Match(
+        readonly Match characterPattern = new Match(
             new Character('a')
             );
 
-        readonly Match complexPattern = new Match(
-            new Character('a'),
-            new Character('b')
+        readonly Match rangePattern = new Match(
+            new Range('0', '5')
             );
 
         [Theory]
+        [InlineData("", false)]
+        [InlineData(null, false)]
         [InlineData("a", true)]
         [InlineData("abc", true)]
         [InlineData("bc", false)]
-        [InlineData("", false)]
-        [InlineData(null, false)]
-        public void Success_PatternConsistingOfOneLetter_ShouldReturnTrueIfTheTextStartsWithThatLetter(string text, bool expected)
+        public void Success_CharacterPatternReceived_ShouldReturnTrueIfTheTextStartsWithThatCharacter(string text, bool expected)
         {
-            bool result = simplePattern.Success(text);
+            bool result = characterPattern.Success(text);
 
             Assert.Equal(expected, result);
         }
 
         [Theory]
-        [InlineData("ab", true)]
-        [InlineData("abc", true)]
-        [InlineData("def", false)]
-        [InlineData("ax", false)]
-        [InlineData("ba", false)]
         [InlineData("", false)]
         [InlineData(null, false)]
-        public void Success_MoreComplexPatternReceived_ShouldReturnTrueIfTheTextFollowsThePattern(string text, bool expected)
+        [InlineData("1", true)]
+        [InlineData("42", true)]
+        [InlineData("61", false)]
+        [InlineData("0", true)]
+        [InlineData("-1", false)]
+        public void Success_RangePatternReceived_ShouldReturnTrueIfTheCharacterInWithinThatRange(string text, bool expected)
         {
-
-            bool result = complexPattern.Success(text);
+            bool result = rangePattern.Success(text);
 
             Assert.Equal(expected, result);
         }
 
         [Theory]
+        [InlineData("", "")]
+        [InlineData(null, null)]
         [InlineData("a", "")]
         [InlineData("abc", "bc")]
         [InlineData("bc", "bc")]
-        [InlineData("", "")]
-        [InlineData(null, null)]
-        public void RemainingText_PatternConsistingOfOneLetter_ShouldReturnTheTextAfterThePattern(string text, string expected)
+        public void RemainingText_CharacterPatternReceived_ShouldReturnTheTextAfterThePattern(string text, string expected)
         {
-            string result = simplePattern.RemainingText(text);
+            string result = characterPattern.RemainingText(text);
 
             Assert.Equal(expected, result);
         }
 
         [Theory]
-        [InlineData("ab", "")]
-        [InlineData("abc", "c")]
-        [InlineData("def", "def")]
-        [InlineData("ax", "ax")]
-        [InlineData("ba", "ba")]
         [InlineData("", "")]
         [InlineData(null, null)]
-        public void RemainingText_MoreComplexPatternReceived_ShouldReturnTheTextAfterThePattern(string text, string expected)
+        [InlineData("1", "")]
+        [InlineData("12", "2")]
+        [InlineData("333", "33")]
+        [InlineData("-1", "-1")]
+        [InlineData("78", "78")]
+        public void RemainingText_RangePatternReceived_ShouldReturnTheTextAfterThePattern(string text, string expected)
         {
-            string result = complexPattern.RemainingText(text);
+            string result = rangePattern.RemainingText(text);
 
             Assert.Equal(expected, result);
         }
