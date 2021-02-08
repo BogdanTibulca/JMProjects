@@ -4,11 +4,11 @@ namespace JSONFormat.Tests
 {
     public class MatchTests
     {
-        Match simplePattern = new Match(
+        readonly Match simplePattern = new Match(
             new Character('a')
             );
 
-        Match complexPattern = new Match(
+        readonly Match complexPattern = new Match(
             new Character('a'),
             new Character('b')
             );
@@ -36,7 +36,6 @@ namespace JSONFormat.Tests
         [InlineData(null, false)]
         public void Success_MoreComplexPatternReceived_ShouldReturnTrueIfTheTextFollowsThePattern(string text, bool expected)
         {
-
 
             bool result = complexPattern.Success(text);
 
@@ -70,5 +69,6 @@ namespace JSONFormat.Tests
 
             Assert.Equal(expected, result);
         }
+
     }
 }

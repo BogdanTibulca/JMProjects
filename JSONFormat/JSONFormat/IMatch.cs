@@ -4,10 +4,10 @@ using System.Text;
 
 namespace JSONFormat
 {
-    interface IMatch
+    public interface IMatch
     {
-        bool Success(string text);
+        public bool Success(string text);
 
-        string RemainingText(string text);
+        public string RemainingText(string text);
     }
 }
