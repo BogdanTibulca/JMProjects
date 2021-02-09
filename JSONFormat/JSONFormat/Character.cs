@@ -13,14 +13,17 @@ namespace JSONFormat
             this.pattern = pattern;
         }
 
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
             if (string.IsNullOrEmpty(text))
             {
-                return false;
+                return new Match(false, text);
             }
 
-            return text[0] == pattern;
+            bool success = text[0] == pattern;
+            string remainingText = success ? text.Substring(1) : text;
+
+            return new Match(success, remainingText);
         }
     }
 }

@@ -15,10 +15,17 @@ namespace JSONFormat
             this.end = end;
         }
 
-        public bool Match(string text)
+        public IMatch Match(string text)
         {
-            return !string.IsNullOrEmpty(text) &&
-               (text[0] >= start && text[0] <= end);
+            if (string.IsNullOrEmpty(text))
+            {
+                return new Match(false, text);
+            }
+
+            bool success = text[0] >= start && text[0] <= end;
+            string remainingText = success ? text.Substring(1) : text;
+
+            return new Match(success, remainingText);
         }
     }
 }
