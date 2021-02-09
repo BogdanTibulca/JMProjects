@@ -6,8 +6,8 @@ namespace JSONFormat
 {
     public interface IMatch
     {
-        public bool Success(string text);
+        public bool Success();
 
-        public string RemainingText(string text);
+        public string RemainingText();
     }
 }

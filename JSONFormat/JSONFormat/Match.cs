@@ -6,26 +6,23 @@ namespace JSONFormat
 {
     public class Match : IMatch
     {
-        private readonly IPattern patterns;
+        private readonly bool success;
+        private readonly string remainingText;
 
-        public Match(IPattern patterns)
+        public Match(bool success, string remainingText)
         {
-            this.patterns = patterns;
+            this.success = success;
+            this.remainingText = remainingText;
         }
 
-        public string RemainingText(string text)
+        public string RemainingText()
         {
-            if (text is null)
-            {
-                return null;
-            }
-
-            return !Success(text) ? text : text.Substring(1);
+            return this.remainingText;
         }
 
-        public bool Success(string text)
+        public bool Success()
         {
-            return this.patterns.Match(text);
+            return this.success;
         }
     }
 }
