@@ -19,7 +19,7 @@ namespace JSONFormat.Tests
         [InlineData("null", false)]
         public void Match_BasicCharacterAndRangePatterns_ShouldValidateText(string text, bool expected)
         {
-            bool result = diggit.Match(text);
+            bool result = diggit.Match(text).Success();
 
             Assert.Equal(expected, result);
         }
@@ -46,7 +46,7 @@ namespace JSONFormat.Tests
                     new Range('A', 'F'))
                 );
 
-            bool result = hex.Match(text);
+            bool result = hex.Match(text).Success();
 
             Assert.Equal(expected, result);
         }

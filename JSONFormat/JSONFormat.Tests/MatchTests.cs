@@ -4,7 +4,7 @@ namespace JSONFormat.Tests
 {
     public class MatchTests
     {
-        readonly Match characterPattern = new Match(
+        /*readonly Match characterPattern = new Match(
             new Character('a')
             );
 
@@ -67,6 +67,6 @@ namespace JSONFormat.Tests
 
             Assert.Equal(expected, result);
         }
-
+*/
     }
 }

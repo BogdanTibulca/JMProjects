@@ -10,28 +10,28 @@ namespace JSONFormat.Tests
         [Fact]
         public void Match_TextReceivedIsNull_ShouldReturnFalse()
         {
-            Assert.False(digit.Match(null));
+            Assert.False(digit.Match(null).Success());
         }
 
         [Fact]
         public void Match_TextReceivedIsEmpty_ShouldReturnFalse()
         {
-            Assert.False(digit.Match(""));
+            Assert.False(digit.Match("").Success());
         }
 
         [Fact]
         public void Match_FirstLetterIsBetweenTheBoundaries_ShouldReturnTrue()
         {
-            Assert.True(digit.Match("abc"));
-            Assert.True(digit.Match("fab"));
-            Assert.True(digit.Match("bcd"));
+            Assert.True(digit.Match("abc").Success());
+            Assert.True(digit.Match("fab").Success());
+            Assert.True(digit.Match("bcd").Success());
         }
 
         [Fact]
         public void Match_FirstLetterIsOutsideBoundaries_ShouldReturnFalse()
         {
-            Assert.False(digit.Match("1ab"));
-            Assert.False(digit.Match("zab"));
+            Assert.False(digit.Match("1ab").Success());
+            Assert.False(digit.Match("zab").Success());
         }
     }
 }
