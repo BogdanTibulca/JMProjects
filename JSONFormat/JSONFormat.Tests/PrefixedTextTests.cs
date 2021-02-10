@@ -1,7 +1,8 @@
 ﻿using Xunit;
+
 namespace JSONFormat.Tests
 {
-    public class TextTests
+    public class PrefixedTextTests
     {
         private readonly PrefixedText trueVal = new PrefixedText("true");
         
