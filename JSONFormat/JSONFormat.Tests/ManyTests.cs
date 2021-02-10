@@ -4,7 +4,7 @@ namespace JSONFormat.Tests
 {
     public class ManyTests
     {
-        Many a = new Many(new Character('a'));
+        private readonly Many a = new Many(new Character('a'));
 
         [Theory]
         [InlineData("", true, "")]
@@ -22,7 +22,7 @@ namespace JSONFormat.Tests
             Assert.Equal(expectedRemainingText, match.RemainingText());
         }
 
-        Many diggits = new Many(new Range('0', '9'));
+        private readonly Many diggits = new Many(new Range('0', '9'));
 
         [Theory]
         [InlineData("ab", true, "ab")]
