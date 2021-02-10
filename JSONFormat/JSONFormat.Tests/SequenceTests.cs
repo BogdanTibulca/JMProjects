@@ -24,11 +24,6 @@ namespace JSONFormat.Tests
             Assert.Equal(expectedRemainingText, result.RemainingText());
         }
 
-        Sequence abc = new Sequence(
-            ab,
-            new Character('c')
-            );
-
         [Theory]
         [InlineData("", false, "")]
         [InlineData(null, false, null)]
@@ -39,6 +34,11 @@ namespace JSONFormat.Tests
         public void Match_MoreComplexPatternReceived_ShouldReturnCorrectSuccessAndRemainingTextValues(
                     string text, bool expectedSuccess, string expectedRemainingText)
         {
+            Sequence abc = new Sequence(
+                ab,
+                new Character('c')
+                );
+
             IMatch result = abc.Match(text);
 
             Assert.Equal(expectedSuccess, result.Success());
@@ -51,16 +51,6 @@ namespace JSONFormat.Tests
             new Range('A', 'F')
             );
 
-        Sequence hexSeq = new Sequence(
-            new Character('u'),
-            new Sequence(
-                hex,
-                hex,
-                hex,
-                hex
-                )
-            );
-
         [Theory]
         [InlineData("", false, "")]
         [InlineData(null, false, null)]
@@ -71,7 +61,17 @@ namespace JSONFormat.Tests
         public void Match_PatternsOfDifferentTypesReceived_ShouldReturnCorrectSuccessAndRemainingTextValues(
                     string text, bool expectedSuccess, string expectedRemainingText)
         {
-            IMatch result = abc.Match(text);
+            Sequence hexSeq = new Sequence(
+                new Character('u'),
+                new Sequence(
+                    hex,
+                    hex,
+                    hex,
+                    hex
+                    )
+                );
+
+            IMatch result = hexSeq.Match(text);
 
             Assert.Equal(expectedSuccess, result.Success());
             Assert.Equal(expectedRemainingText, result.RemainingText());
