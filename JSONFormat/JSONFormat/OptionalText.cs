@@ -15,7 +15,7 @@ namespace JSONFormat
 
         public IMatch Match(string text)
         {
-            throw new NotImplementedException();
+            return new Match(true, this.pattern.Match(text).RemainingText());
         }
     }
 }
