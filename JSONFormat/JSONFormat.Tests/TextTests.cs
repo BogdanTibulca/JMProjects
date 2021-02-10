@@ -3,7 +3,7 @@ namespace JSONFormat.Tests
 {
     public class TextTests
     {
-        Text trueVal = new Text("true");
+        private readonly Text trueVal = new Text("true");
         
         [Theory]
         [InlineData("", false, "")]
@@ -21,7 +21,7 @@ namespace JSONFormat.Tests
             Assert.Equal(expectedRemainingText, match.RemainingText());
         }
 
-        Text empty = new Text("");
+        private readonly Text empty = new Text("");
 
         [Theory]
         [InlineData("true", true, "true")]
