@@ -2,9 +2,9 @@
 
 namespace JSONFormat.Tests
 {
-    public class PrefixedTextTests
+    public class TextTests
     {
-        private readonly PrefixedText trueVal = new PrefixedText("true");
+        private readonly Text trueVal = new Text("true");
         
         [Theory]
         [InlineData("", false, "")]
@@ -22,7 +22,7 @@ namespace JSONFormat.Tests
             Assert.Equal(expectedRemainingText, match.RemainingText());
         }
 
-        private readonly PrefixedText empty = new PrefixedText("");
+        private readonly Text empty = new Text("");
 
         [Theory]
         [InlineData("true", true, "true")]

@@ -1,10 +1,10 @@
 ﻿namespace JSONFormat
 {
-    public class PrefixedText : IPattern
+    public class Text : IPattern
     {
         private readonly string prefix;
 
-        public PrefixedText(string prefix)
+        public Text(string prefix)
         {
             this.prefix = prefix;
         }
