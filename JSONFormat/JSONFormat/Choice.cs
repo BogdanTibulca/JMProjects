@@ -17,9 +17,11 @@ namespace JSONFormat
         {
             foreach (var pattern in patterns)
             {
-                if (pattern.Match(text).Success())
+                IMatch result = pattern.Match(text);
+
+                if (result.Success())
                 {
-                    return new Match(true, text.Substring(1));
+                    return new Match(true, result.RemainingText());
                 }
             }
 
