@@ -11,12 +11,7 @@
 
         public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return new Match(false, text);
-            }
-
-            return text.IndexOf(prefix) == 0 ?
+            return !string.IsNullOrEmpty(text) && text.Substring(0, prefix.Length).Equals(prefix) ?
                 new Match(true, text.Substring(prefix.Length)) :
                 new Match(false, text);
         }
