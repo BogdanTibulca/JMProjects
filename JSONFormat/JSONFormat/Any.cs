@@ -15,12 +15,7 @@ namespace JSONFormat
 
         public IMatch Match(string text)
         {
-            if (string.IsNullOrEmpty(text))
-            {
-                return new Match(false, text);
-            }
-
-            return accepted.Contains(text[0]) ?
+            return !string.IsNullOrEmpty(text) && accepted.Contains(text[0]) ?
                 new Match(true, text.Substring(1)) :
                 new Match(false, text);
         }
