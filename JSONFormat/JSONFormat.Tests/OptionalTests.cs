@@ -2,9 +2,9 @@
 
 namespace JSONFormat.Tests
 {
-    public class OptionalTextTests
+    public class OptionalTests
     {
-        private readonly OptionalText a = new OptionalText(new Character('a'));
+        private readonly Optional a = new Optional(new Character('a'));
 
         [Theory]
         [InlineData("", true, "")]
@@ -21,7 +21,7 @@ namespace JSONFormat.Tests
             Assert.True(expectedSuccess);
         }
 
-        private readonly OptionalText sign = new OptionalText(new Character('-'));
+        private readonly Optional sign = new Optional(new Character('-'));
         
         [Theory]
         [InlineData("-123", true, "123")]

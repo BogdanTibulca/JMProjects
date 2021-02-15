@@ -4,11 +4,11 @@ using System.Text;
 
 namespace JSONFormat
 {
-    public class OptionalText : IPattern
+    public class Optional : IPattern
     {
         private readonly IPattern pattern;
 
-        public OptionalText(IPattern pattern)
+        public Optional(IPattern pattern)
         {
             this.pattern = pattern;
         }
