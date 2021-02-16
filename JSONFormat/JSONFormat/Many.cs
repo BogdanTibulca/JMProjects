@@ -15,12 +15,14 @@ namespace JSONFormat
 
         public IMatch Match(string text)
         {
-            while (pattern.Match(text).Success())
+            IMatch result = pattern.Match(text);
+
+            while (result.Success())
             {
-                text = pattern.Match(text).RemainingText();
+                result = pattern.Match(result.RemainingText());
             }
 
-            return new Match(true, text);
+            return new Match(true, result.RemainingText());
         }
     }
 }
