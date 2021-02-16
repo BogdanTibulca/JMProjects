@@ -21,7 +21,7 @@ namespace JSONFormat
 
                 if (result.Success())
                 {
-                    return new Match(true, result.RemainingText());
+                    return result;
                 }
             }
 
