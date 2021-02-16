@@ -15,21 +15,19 @@ namespace JSONFormat
 
         public IMatch Match(string text)
         {
-            string originalText = text;
+            IMatch result = new Match(true, text);
 
             foreach (IPattern pattern in this.patterns)
             {
-                IMatch result = pattern.Match(originalText);
+                result = pattern.Match(result.RemainingText());
 
                 if (!result.Success())
                 {
                     return new Match(false, text);
                 }
-
-                originalText = result.RemainingText();
             }
 
-            return new Match(true, originalText);
+            return result;
         }
     }
 }
