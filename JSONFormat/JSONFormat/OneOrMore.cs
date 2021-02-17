@@ -10,16 +10,12 @@ namespace JSONFormat
 
         public OneOrMore(IPattern pattern)
         {
-            this.pattern = new Many(pattern);
+            this.pattern = new Sequence(pattern, new Many(pattern));
         }
 
         public IMatch Match(string text)
         {
-            IMatch result = this.pattern.Match(text);
-
-            return string.IsNullOrEmpty(text) || result.RemainingText().Equals(text) ?
-                new Match(false, text) :
-                new Match(true, result.RemainingText());
+            return this.pattern.Match(text);
         }
     }
 }
