@@ -7,11 +7,16 @@ namespace JSONFormat
     public class Number : IPattern
     {
         private readonly IPattern pattern;
-        private readonly IPattern numbersRange = new Range('0', '9');
 
         public Number()
         {
-            this.pattern = new OneOrMore(numbersRange);
+            IPattern numbersRange = new Range('0', '9');
+            IPattern integerNumber = new OneOrMore(numbersRange);
+            IPattern decimalNumber = new Sequence(
+                integerNumber,
+                new Optional(new Sequence(new Character('.'), integerNumber)));
+
+            this.pattern = new Choice(decimalNumber);
         }
 
         public IMatch Match(string text)
