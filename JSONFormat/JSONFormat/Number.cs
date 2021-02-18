@@ -12,10 +12,11 @@ namespace JSONFormat
         {
             IPattern numbersRange = new Range('0', '9');
             IPattern exponent = new Any("eE");
-
+            IPattern negative = new Character('-');
             IPattern integerNumber = new OneOrMore(numbersRange);
 
             IPattern exponentialNumber = new Sequence(
+                new Optional(negative),
                 integerNumber,
                 new Optional(new Sequence(new Character('.'), integerNumber)),
                 new Optional(new Sequence(exponent, integerNumber)));
