@@ -11,17 +11,24 @@ namespace JSONFormat
         public Number()
         {
             IPattern numbersRange = new Range('0', '9');
-            IPattern exponent = new Any("eE");
             IPattern negative = new Character('-');
             IPattern integerNumber = new OneOrMore(numbersRange);
 
-            IPattern exponentialNumber = new Sequence(
+            IPattern exponent = new Sequence(new Any("eE"), new Optional(negative));
+            IPattern exponentialNumber = new Sequence(new Optional(integerNumber), exponent, integerNumber);
+
+            IPattern decimalNumber = new Sequence(
+                    new Optional(new Character('.')),
+                    new Optional(exponent),
+                    integerNumber);
+
+            IPattern number = new Sequence(
                 new Optional(negative),
                 integerNumber,
-                new Optional(new Sequence(new Character('.'), integerNumber)),
-                new Optional(new Sequence(exponent, integerNumber)));
+                new Optional(decimalNumber),
+                new Optional(exponentialNumber));
 
-            this.pattern = new Sequence(exponentialNumber);
+            this.pattern = new Sequence(number);
         }
 
         public IMatch Match(string text)
