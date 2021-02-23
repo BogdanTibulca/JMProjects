@@ -10,25 +10,29 @@ namespace JSONFormat
 
         public Number()
         {
-            IPattern numbersRange = new Range('0', '9');
-            IPattern negative = new Character('-');
-            IPattern integerNumber = new OneOrMore(numbersRange);
+            var onenine = new Range('1', '9');
+            var digit = new Choice(new Character('0'), onenine);
+            var digits = new OneOrMore(digit);
+            var negative = new Character('-');
 
-            IPattern exponent = new Sequence(new Any("eE"), new Optional(negative));
-            IPattern exponentialNumber = new Sequence(new Optional(integerNumber), exponent, integerNumber);
+            var integer = new Choice(
+                digit,
+                new Sequence(onenine, digits),
+                new Sequence(negative, digit),
+                new Sequence(negative, onenine, digits));
 
-            IPattern decimalNumber = new Sequence(
-                    new Optional(new Character('.')),
-                    new Optional(exponent),
-                    integerNumber);
+            var fraction = new Sequence(
+                integer,
+                new Character('.'),
+                digits);
 
-            IPattern number = new Sequence(
-                new Optional(negative),
-                integerNumber,
-                new Optional(decimalNumber),
-                new Optional(exponentialNumber));
+            var exponent = new Sequence(
+                new Choice(integer, fraction),
+                new Any("eE"),
+                new Optional(new Any("+-")),
+                digits);
 
-            this.pattern = new Sequence(number);
+            this.pattern = new Choice(integer, fraction, exponent);
         }
 
         public IMatch Match(string text)
