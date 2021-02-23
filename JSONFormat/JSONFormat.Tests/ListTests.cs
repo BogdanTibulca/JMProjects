@@ -15,6 +15,9 @@ namespace JSONFormat.Tests
         [InlineData("1,2,3", true, "")]
         [InlineData("1,2,3,", true, ",")]
         [InlineData("1a", true, "a")]
+        [InlineData("11abc", true, "1abc")]
+        [InlineData("1,1abc", true, "abc")]
+        [InlineData(",11abc", true, ",11abc")]
         [InlineData("abc", true, "abc")]
         public void Match_SimpleElementAndSeparatorReceived_ShouldReturnSuccessAndTheRemaininTextAfterApplyingThePattern(
             string text, bool expectedSuccess, string expectedRemainingText)
