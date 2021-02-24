@@ -22,17 +22,15 @@ namespace JSONFormat
                 new Sequence(negative, onenine, digits));
 
             var fraction = new Sequence(
-                integer,
                 new Character('.'),
                 digits);
 
             var exponent = new Sequence(
-                new Choice(fraction, integer),
                 new Any("eE"),
                 new Optional(new Any("+-")),
                 digits);
 
-            this.pattern = new Choice(exponent, fraction, integer);
+            this.pattern = new Sequence(integer, new Optional(fraction), new Optional(exponent));
         }
 
         public IMatch Match(string text)
