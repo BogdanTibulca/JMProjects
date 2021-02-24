@@ -70,10 +70,10 @@ namespace JSONFormat.Tests
         }
 
         [Theory]
-        [InlineData("-2.e3", true, "")]
+        [InlineData("-2.0e3", true, "")]
         [InlineData("0.44e-3", true, "")]
-        [InlineData("5.E2", true, "")]
-        [InlineData("6.E-3", true, "")]
+        [InlineData("5.1E2", true, "")]
+        [InlineData("6.3E-3", true, "")]
         public void Match_FractionalNumbersWithExponent_ShouldReturnSuccessAndTheRemainingText(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
