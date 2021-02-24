@@ -20,6 +20,7 @@ namespace JSONFormat.Tests
 
         [Theory]
         [InlineData("0", true, "")]
+        [InlineData("8", true, "")]
         [InlineData("987", true, "")]
         [InlineData("45", true, "")]
         public void Match_Integer_ShouldReturnSuccessAndTheRemainingText(

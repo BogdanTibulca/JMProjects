@@ -11,12 +11,12 @@ namespace JSONFormat
         public Number()
         {
             var onenine = new Range('1', '9');
-            var digit = new Choice(new Character('0'), onenine);
+            var digit = new Choice(new Character('0'), new OneOrMore(onenine));
             var digits = new OneOrMore(digit);
             var negative = new Character('-');
 
             var integer = new Choice(
-                digit,
+                new Sequence(digit),
                 new Sequence(onenine, digits),
                 new Sequence(negative, digit),
                 new Sequence(negative, onenine, digits));
@@ -27,12 +27,12 @@ namespace JSONFormat
                 digits);
 
             var exponent = new Sequence(
-                new Choice(integer, fraction),
+                new Choice(fraction, integer),
                 new Any("eE"),
                 new Optional(new Any("+-")),
                 digits);
 
-            this.pattern = new Choice(integer, fraction, exponent);
+            this.pattern = new Choice(exponent, fraction, integer);
         }
 
         public IMatch Match(string text)
