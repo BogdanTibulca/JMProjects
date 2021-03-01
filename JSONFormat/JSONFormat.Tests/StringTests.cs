@@ -22,7 +22,7 @@ namespace JSONFormat.Tests
         [Theory]
         [InlineData(@"""text""", true, "")]
         [InlineData(@"text""", false, @"text""")]
-        [InlineData(@"""text", false, "")]
+        [InlineData(@"""text", false, @"""text")]
         public void Match_TheTextIsAlwaysWrappedInDoubleQuotes_ReturnsCorrectSuccessAndRemainingTextValues(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
@@ -33,7 +33,7 @@ namespace JSONFormat.Tests
         }
 
         [Theory]
-        [InlineData(@"""text\""", false, @"\")]
+        [InlineData(@"""text\""", false, @"""text\""")]
         public void Match_TheTextDoesNotEndWithReverseSolidus_ReturnsCorrectSuccessAndRemainingTextValues(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
