@@ -10,7 +10,9 @@ namespace JSONFormat
 
         public String()
         {
+            var quotes = new Character('"');
 
+            this.pattern = new Sequence(quotes, quotes);
         }
 
         public IMatch Match(string text)
