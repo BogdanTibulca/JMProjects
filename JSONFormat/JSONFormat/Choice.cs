@@ -6,7 +6,7 @@ namespace JSONFormat
 {
     public class Choice : IPattern
     {
-        private readonly IPattern[] patterns;
+        private IPattern[] patterns;
 
         public Choice(params IPattern[] patterns)
         {
@@ -26,6 +26,12 @@ namespace JSONFormat
             }
 
             return new Match(false, text);
+        }
+
+        public void Add(IPattern pattern)
+        {
+            Array.Resize(ref this.patterns, this.patterns.Length + 1);
+            this.patterns[^1] = pattern;
         }
     }
 }
