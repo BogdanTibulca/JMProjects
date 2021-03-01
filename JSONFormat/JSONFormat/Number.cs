@@ -10,16 +10,13 @@ namespace JSONFormat
 
         public Number()
         {
-            var onenine = new Range('1', '9');
-            var digit = new Choice(new Character('0'), new OneOrMore(onenine));
+            var digit = new Range('0', '9');
             var digits = new OneOrMore(digit);
             var negative = new Character('-');
 
-            var integer = new Choice(
-                new Sequence(digit),
-                new Sequence(onenine, digits),
-                new Sequence(negative, digit),
-                new Sequence(negative, onenine, digits));
+            var integer = new Sequence(
+                new Optional(negative),
+                new Choice(new Character('0'), digits));
 
             var fraction = new Sequence(
                 new Character('.'),
