@@ -20,7 +20,9 @@ namespace JSONFormat.Tests
         }
 
         [Theory]
-        [InlineData("text", true, "")]
+        [InlineData(@"""text""", true, "")]
+        [InlineData(@"text""", false, @"text""")]
+        [InlineData(@"""text", false, "")]
         public void Match_TheTextIsAlwaysWrappedInDoubleQuotes_ReturnsCorrectSuccessAndRemainingTextValues(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
@@ -31,7 +33,7 @@ namespace JSONFormat.Tests
         }
 
         [Theory]
-        [InlineData(@"""text\""", false, @"""\""")]
+        [InlineData(@"""text\""", false, @"\")]
         public void Match_TheTextDoesNotEndWithReverseSolidus_ReturnsCorrectSuccessAndRemainingTextValues(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
@@ -68,11 +70,11 @@ namespace JSONFormat.Tests
         }
 
         [Theory]
-        [InlineData(@"""a\rb""", true, @"""a\rb""")]
-        [InlineData(@"""a\fb""", true, @"""a\fb""")]
-        [InlineData(@"""a\nb""", true, @"""a\nb""")]
-        [InlineData(@"""a\tb""", true, @"""a\tb""")]
-        [InlineData(@"""a\bb""", true, @"""a\bb""")]
+        [InlineData(@"""a\rb""", true, "")]
+        [InlineData(@"""a\fb""", true, "")]
+        [InlineData(@"""a\nb""", true, "")]
+        [InlineData(@"""a\tb""", true, "")]
+        [InlineData(@"""a\bb""", true, "")]
         public void Match_EscapedControlCharacterAreAllowed_ReturnsCorrectSuccessAndRemainingTextValues(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
@@ -83,9 +85,9 @@ namespace JSONFormat.Tests
         }
 
         [Theory]
-        [InlineData(@""" \u25CF """, true, @"""""")]
-        [InlineData(@""" \u25C """, false, @"""\u25C """)]
-        [InlineData(@""" \u """, false, @"""\u """)]
+        [InlineData(@"""\u25CF""", true, "")]
+        [InlineData(@"""\u25C""", false, @"""\u25C""")]
+        [InlineData(@"""\u""", false, @"""\u""")]
         public void Match_TheTextCanContainValidEscapedUnicode_ReturnsCorrectSuccessAndRemainingTextValues(
             string text, bool expectedSuccess, string expectedRemainingText)
         {
