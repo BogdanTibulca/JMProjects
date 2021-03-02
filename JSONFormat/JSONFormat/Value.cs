@@ -10,7 +10,7 @@ namespace JSONFormat
 
         public Value()
         {
-
+            this.pattern = new Text("null");
         }
 
         public IMatch Match(string text)
