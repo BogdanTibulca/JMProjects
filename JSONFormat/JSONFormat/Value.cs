@@ -11,9 +11,10 @@ namespace JSONFormat
         public Value()
         {
             this.pattern = new Choice(
-                new Text("null"),
+                new Number(),
                 new Text("true"),
-                new Text("false"));
+                new Text("false"),
+                new Text("null"));
         }
 
         public IMatch Match(string text)
