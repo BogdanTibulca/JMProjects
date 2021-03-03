@@ -58,8 +58,9 @@ namespace JSONFormat.Tests
 
         [Theory]
         [InlineData("[]", true, "")]
+        [InlineData("[1]", true, "")]
         [InlineData("[1,2,3]", true, "")]
-        [InlineData("[a,b,c,d]", true, "")]
+        [InlineData("[\"a\",\"b\",\"c\"]", true, "")]
         public void Match_TheValueIsAnArray_ShouldReturnSuccessAndTheRemaininText(
             string array, bool expectedSuccess, string expectedRemainingText)
         {
@@ -84,18 +85,18 @@ namespace JSONFormat.Tests
 
         [Theory]
         [InlineData("23", true, "")]
-        [InlineData(" text ", true, "")]
-        [InlineData(" text", true, "")]
-        [InlineData("text ", true, "")]
-        [InlineData("text\t ", true, "")]
-        [InlineData("\ttext", true, "")]
-        [InlineData("\ttext\t", true, "")]
-        [InlineData("text\r ", true, "")]
-        [InlineData("\rtext", true, "")]
-        [InlineData("\rtext\r", true, "")]
-        [InlineData("text\n ", true, "")]
-        [InlineData("\ntext", true, "")]
-        [InlineData("\ntext\n", true, "")]
+        [InlineData(" 23 ", true, "")]
+        [InlineData(" 23", true, "")]
+        [InlineData("23 ", true, "")]
+        [InlineData("23\t ", true, "")]
+        [InlineData("\t23", true, "")]
+        [InlineData("\t23\t", true, "")]
+        [InlineData("23\r ", true, "")]
+        [InlineData("\r23", true, "")]
+        [InlineData("\r23\r", true, "")]
+        [InlineData("23\n ", true, "")]
+        [InlineData("\n23", true, "")]
+        [InlineData("\n23\n", true, "")]
         public void Match_TheValueHasWhitespacesAtTheBeginningAndAtTheEnd_ShouldReturnSuccessAndTheRemainingText(
             string val, bool expectedSuccess, string expectedRemainingText)
         {
