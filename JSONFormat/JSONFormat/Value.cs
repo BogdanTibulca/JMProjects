@@ -24,15 +24,26 @@ namespace JSONFormat
                 choice,
                 new Optional(whitespace));
 
-            var elements = new List(
-                value,
-                new Character(','));
-
             var array = new Sequence(
                 new Character('['),
-                new Choice(whitespace, elements),
+                new List(
+                    value,
+                    new Character(',')),
                 new Character(']'));
 
+            var member = new Sequence(
+                new Optional(whitespace),
+                new String(),
+                new Optional(whitespace),
+                new Character(':'),
+                value);
+
+            var obj = new Sequence(
+                new Character('{'),
+                new List(member, new Character(',')),
+                new Character('}'));
+
+            choice.Add(obj);
             choice.Add(array);
 
             this.pattern = value;
