@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "JSONFormat": {
+      "commandName": "Project",
+      "commandLineArgs": "C:\\Users\\bogda\\OneDrive\\Desktop\\validJson.txt"
+    }
+  }
+}

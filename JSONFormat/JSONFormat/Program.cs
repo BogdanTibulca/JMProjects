@@ -2,11 +2,22 @@
 
 namespace JSONFormat
 {
-    class Program
+    public class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            if (args.Length == 0)
+            {
+                Console.WriteLine("Please enter a path to a text file!");
+                return;
+            }
+
+            string jsonText = System.IO.File.ReadAllText(args[0]);
+
+            var value = new Value();
+            bool result = value.Match(jsonText).Success();
+
+            Console.WriteLine(result);
         }
     }
 }
