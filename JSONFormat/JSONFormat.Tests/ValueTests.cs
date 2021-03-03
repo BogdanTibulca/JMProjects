@@ -60,6 +60,7 @@ namespace JSONFormat.Tests
         [InlineData("[]", true, "")]
         [InlineData("[1]", true, "")]
         [InlineData("[1,2,3]", true, "")]
+        [InlineData("[1,      2, 3]", true, "")]
         [InlineData("[\"a\",\"b\",\"c\"]", true, "")]
         public void Match_TheValueIsAnArray_ShouldReturnSuccessAndTheRemaininText(
             string array, bool expectedSuccess, string expectedRemainingText)
