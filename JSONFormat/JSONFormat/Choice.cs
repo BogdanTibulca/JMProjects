@@ -31,6 +31,7 @@ namespace JSONFormat
         public void Add(IPattern pattern)
         {
             Array.Resize(ref this.patterns, this.patterns.Length + 1);
+
             this.patterns[^1] = pattern;
         }
     }

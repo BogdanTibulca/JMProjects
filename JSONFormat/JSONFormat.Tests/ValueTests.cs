@@ -58,6 +58,7 @@ namespace JSONFormat.Tests
 
         [Theory]
         [InlineData("[]", true, "")]
+        [InlineData("[         ]", true, "")]
         [InlineData("[1]", true, "")]
         [InlineData("[1,2,3]", true, "")]
         [InlineData("[1,      2, 3]", true, "")]
@@ -73,6 +74,7 @@ namespace JSONFormat.Tests
 
         [Theory]
         [InlineData("{}", true, "")]
+        [InlineData("{      }", true, "")]
         [InlineData("{\"age\": 23}", true, "")]
         [InlineData("{\"age\": 23, \"name\": \"Dan\"}", true, "")]
         public void Match_TheValueIsAnObject_ShouldReturnSuccessAndTheRemaininText(

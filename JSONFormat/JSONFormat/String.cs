@@ -20,6 +20,7 @@ namespace JSONFormat
                     new Sequence(new Character('u'), hex, hex, hex, hex)));
 
             var character = new Choice(
+                new Sequence(quotes, quotes),
                 new Character('\u0020'),
                 new Character('\u0021'),
                 new Range('\u0023', '\u005B'),
