@@ -20,9 +20,9 @@ namespace JSONFormat
                     new Text("null"));
 
             var value = new Sequence(
-                new Optional(whitespace),
+                whitespace,
                 choice,
-                new Optional(whitespace));
+                whitespace);
 
             var array = new Sequence(
                 new Character('['),
@@ -30,13 +30,12 @@ namespace JSONFormat
                 new List(
                     value,
                     new Character(',')),
-                whitespace,
                 new Character(']'));
 
             var member = new Sequence(
-                new Optional(whitespace),
+                whitespace,
                 new String(),
-                new Optional(whitespace),
+                whitespace,
                 new Character(':'),
                 value);
 
@@ -44,7 +43,6 @@ namespace JSONFormat
                 new Character('{'),
                 whitespace,
                 new List(member, new Character(',')),
-                whitespace,
                 new Character('}'));
 
             choice.Add(obj);
