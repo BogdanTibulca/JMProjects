@@ -10,10 +10,7 @@ namespace JSONFormat
 
         public Value()
         {
-            var whitespace = new OneOrMore(
-                new Choice(
-                    new Any("\r\t\n "),
-                    new Sequence(new Character('\"'), new Character('\"'))));
+            var whitespace = new Many(new Any("\r\t\n "));
 
             var choice = new Choice(
                     new String(),
@@ -29,11 +26,11 @@ namespace JSONFormat
 
             var array = new Sequence(
                 new Character('['),
-                new Optional(whitespace),
+                whitespace,
                 new List(
                     value,
                     new Character(',')),
-                new Optional(whitespace),
+                whitespace,
                 new Character(']'));
 
             var member = new Sequence(
@@ -45,9 +42,9 @@ namespace JSONFormat
 
             var obj = new Sequence(
                 new Character('{'),
-                new Optional(whitespace),
+                whitespace,
                 new List(member, new Character(',')),
-                new Optional(whitespace),
+                whitespace,
                 new Character('}'));
 
             choice.Add(obj);

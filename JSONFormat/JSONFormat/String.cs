@@ -20,14 +20,13 @@ namespace JSONFormat
                     new Sequence(new Character('u'), hex, hex, hex, hex)));
 
             var character = new Choice(
-                new Sequence(quotes, quotes),
                 new Character('\u0020'),
                 new Character('\u0021'),
                 new Range('\u0023', '\u005B'),
                 new Range('\u005D', char.MaxValue),
                 escaped);
 
-            this.pattern = new Sequence(quotes, new OneOrMore(character), quotes);
+            this.pattern = new Sequence(quotes, new Many(character), quotes);
         }
 
         public IMatch Match(string text)
