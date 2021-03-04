@@ -15,9 +15,9 @@ namespace JSONFormat
             string jsonText = System.IO.File.ReadAllText(args[0]);
 
             var value = new Value();
-            bool result = value.Match(jsonText).Success();
+            var result = value.Match(jsonText);
 
-            Console.WriteLine(result);
+            Console.WriteLine(result.Success() && result.RemainingText() == "");
         }
     }
 }
