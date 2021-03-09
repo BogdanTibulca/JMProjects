@@ -13,7 +13,7 @@ namespace Collections
 
         public void Add(int element)
         {
-            Array.Resize(ref this.array, this.array.Length + 1);
+            this.ResizeArrayBy(1);
 
             this.array[this.array.Length - 1] = element;
         }
@@ -72,7 +72,7 @@ namespace Collections
                 return;
             }
 
-            Array.Resize(ref this.array, this.array.Length + 1);
+            this.ResizeArrayBy(1);
 
             for (int i = this.array.Length - 1; i > index; i--)
             {
@@ -84,7 +84,7 @@ namespace Collections
 
         public void Clear()
         {
-            Array.Resize(ref this.array, 0);
+            this.ResizeArrayBy(-this.Count());
         }
 
         public void Remove(int element)
@@ -101,7 +101,7 @@ namespace Collections
                 this.array[i] = this.array[i + 1];
             }
 
-            Array.Resize(ref this.array, this.array.Length - 1);
+            this.ResizeArrayBy(-1);
         }
 
         public void RemoveAt(int index)
@@ -116,7 +116,12 @@ namespace Collections
                 this.array[index] = this.array[++index];
             }
 
-            Array.Resize(ref this.array, this.array.Length - 1);
+            this.ResizeArrayBy(-1);
+        }
+
+        private void ResizeArrayBy(int num)
+        {
+            Array.Resize(ref this.array, this.Count() + num);
         }
     }
 }
