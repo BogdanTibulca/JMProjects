@@ -85,5 +85,22 @@ namespace Collections
         {
             Array.Resize(ref this.array, 0);
         }
+
+        public void Remove(int element)
+        {
+            int firstOccurrence = this.IndexOf(element);
+
+            if (firstOccurrence == -1)
+            {
+                return;
+            }
+
+            for (int i = firstOccurrence; i < this.array.Length - 1; i++)
+            {
+                this.array[i] = this.array[i + 1];
+            }
+
+            Array.Resize(ref this.array, this.array.Length - 1);
+        }
     }
 }
