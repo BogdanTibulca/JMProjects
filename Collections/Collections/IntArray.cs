@@ -32,5 +32,9 @@ namespace Collections
 
             return this.array[index];
         }
+        public void SetElement(int index, int element)
+        {
+            this.array[index] = element;
+        }
     }
 }
