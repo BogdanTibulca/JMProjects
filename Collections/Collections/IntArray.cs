@@ -80,5 +80,10 @@ namespace Collections
 
             this.array[index] = element;
         }
+
+        public void Clear()
+        {
+            Array.Resize(ref this.array, 0);
+        }
     }
 }
