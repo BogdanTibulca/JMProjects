@@ -18,6 +18,11 @@ namespace Collections
             this.array[this.array.Length - 1] = element;
         }
 
+        public int Count()
+        {
+            return this.array.Length;
+        }
+
         public int? Element(int index)
         {
             if (index < 0 || index > this.array.Length - 1)
