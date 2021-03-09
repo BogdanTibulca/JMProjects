@@ -6,18 +6,18 @@ namespace Collections
     {
         private int[] array;
         private int count = 0;
+        private int size = 4;
 
         public IntArray()
         {
-            this.array = new int[this.count];
+            this.array = new int[this.size];
         }
 
         public void Add(int element)
         {
-            this.ResizeArrayBy(1);
-            this.count++;
+            this.ResizeArray();
 
-            this.array[this.count - 1] = element;
+            this.array[this.count++] = element;
         }
 
         public int Count()
@@ -42,9 +42,9 @@ namespace Collections
 
         public bool Contains(int element)
         {
-            foreach (int num in this.array)
+            for (int i = 0; i < this.count; i++)
             {
-                if (num == element)
+                if (this.array[i] == element)
                 {
                     return true;
                 }
@@ -68,13 +68,13 @@ namespace Collections
 
         public void Insert(int index, int element)
         {
-            if (index < 0 || index > this.count)
+            if (index < 0 || index > this.size)
             {
                 Console.WriteLine("Invalid index");
                 return;
             }
 
-            this.ResizeArrayBy(1);
+            this.ResizeArray();
             this.count++;
 
             for (int i = this.count - 1; i > index; i--)
@@ -87,8 +87,9 @@ namespace Collections
 
         public void Clear()
         {
-            this.ResizeArrayBy(-this.count);
             this.count = 0;
+            this.size = 4;
+            Array.Resize(ref this.array, this.size);
         }
 
         public void Remove(int element)
@@ -105,7 +106,7 @@ namespace Collections
                 this.array[i] = this.array[i + 1];
             }
 
-            this.ResizeArrayBy(-1);
+            this.count--;
         }
 
         public void RemoveAt(int index)
@@ -120,12 +121,16 @@ namespace Collections
                 this.array[index] = this.array[++index];
             }
 
-            this.ResizeArrayBy(-1);
+            this.count--;
         }
 
-        private void ResizeArrayBy(int num)
+        private void ResizeArray()
         {
-            Array.Resize(ref this.array, this.count + num);
+            if (this.count == this.size)
+            {
+                this.size *= 2;
+                Array.Resize(ref this.array, this.size);
+            }
         }
     }
 }
