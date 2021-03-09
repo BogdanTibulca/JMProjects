@@ -32,6 +32,7 @@ namespace Collections
 
             return this.array[index];
         }
+
         public void SetElement(int index, int element)
         {
             this.array[index] = element;
@@ -98,6 +99,21 @@ namespace Collections
             for (int i = firstOccurrence; i < this.array.Length - 1; i++)
             {
                 this.array[i] = this.array[i + 1];
+            }
+
+            Array.Resize(ref this.array, this.array.Length - 1);
+        }
+
+        public void RemoveAt(int index)
+        {
+            if (index < 0 || index > this.array.Length - 1)
+            {
+                return;
+            }
+
+            while (index < this.array.Length - 1)
+            {
+                this.array[index] = this.array[++index];
             }
 
             Array.Resize(ref this.array, this.array.Length - 1);
