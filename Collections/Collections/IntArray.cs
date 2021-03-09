@@ -36,5 +36,18 @@ namespace Collections
         {
             this.array[index] = element;
         }
+
+        public bool Contains(int element)
+        {
+            foreach (int num in this.array)
+            {
+                if (num == element)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 }
