@@ -5,27 +5,29 @@ namespace Collections
     public class IntArray
     {
         private int[] array;
+        private int count = 0;
 
         public IntArray()
         {
-            this.array = new int[0];
+            this.array = new int[this.count];
         }
 
         public void Add(int element)
         {
             this.ResizeArrayBy(1);
+            this.count++;
 
-            this.array[this.array.Length - 1] = element;
+            this.array[this.count - 1] = element;
         }
 
         public int Count()
         {
-            return this.array.Length;
+            return this.count;
         }
 
         public int? Element(int index)
         {
-            if (index < 0 || index > this.array.Length - 1)
+            if (index < 0 || index > this.count - 1)
             {
                 return null;
             }
@@ -53,7 +55,7 @@ namespace Collections
 
         public int IndexOf(int element)
         {
-            for (int i = 0; i < this.array.Length; i++)
+            for (int i = 0; i < this.count; i++)
             {
                 if (this.array[i] == element)
                 {
@@ -66,15 +68,16 @@ namespace Collections
 
         public void Insert(int index, int element)
         {
-            if (index < 0 || index > this.array.Length)
+            if (index < 0 || index > this.count)
             {
                 Console.WriteLine("Invalid index");
                 return;
             }
 
             this.ResizeArrayBy(1);
+            this.count++;
 
-            for (int i = this.array.Length - 1; i > index; i--)
+            for (int i = this.count - 1; i > index; i--)
             {
                 this.array[i] = this.array[i - 1];
             }
@@ -84,7 +87,8 @@ namespace Collections
 
         public void Clear()
         {
-            this.ResizeArrayBy(-this.Count());
+            this.ResizeArrayBy(-this.count);
+            this.count = 0;
         }
 
         public void Remove(int element)
@@ -96,7 +100,7 @@ namespace Collections
                 return;
             }
 
-            for (int i = firstOccurrence; i < this.array.Length - 1; i++)
+            for (int i = firstOccurrence; i < this.count - 1; i++)
             {
                 this.array[i] = this.array[i + 1];
             }
@@ -106,12 +110,12 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index > this.array.Length - 1)
+            if (index < 0 || index > this.count - 1)
             {
                 return;
             }
 
-            while (index < this.array.Length - 1)
+            while (index < this.count - 1)
             {
                 this.array[index] = this.array[++index];
             }
@@ -121,7 +125,7 @@ namespace Collections
 
         private void ResizeArrayBy(int num)
         {
-            Array.Resize(ref this.array, this.Count() + num);
+            Array.Resize(ref this.array, this.count + num);
         }
     }
 }
