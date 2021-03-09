@@ -62,5 +62,23 @@ namespace Collections
 
             return -1;
         }
+
+        public void Insert(int index, int element)
+        {
+            if (index < 0 || index > this.array.Length)
+            {
+                Console.WriteLine("Invalid index");
+                return;
+            }
+
+            Array.Resize(ref this.array, this.array.Length + 1);
+
+            for (int i = this.array.Length - 1; i > index; i--)
+            {
+                this.array[i] = this.array[i - 1];
+            }
+
+            this.array[index] = element;
+        }
     }
 }
