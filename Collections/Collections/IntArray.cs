@@ -49,5 +49,18 @@ namespace Collections
 
             return false;
         }
+
+        public int IndexOf(int element)
+        {
+            for (int i = 0; i < this.array.Length; i++)
+            {
+                if (this.array[i] == element)
+                {
+                    return i;
+                }
+            }
+
+            return -1;
+        }
     }
 }
