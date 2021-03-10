@@ -64,8 +64,8 @@ namespace Collections.Tests
         public void IndexOf_ReturnsTheIndexOfAGivenNumber(
             int number, int expectedIndex)
         {
-            sortedArray.Add(2);
             sortedArray.Add(3);
+            sortedArray.Add(2);
             sortedArray.Add(4);
 
             Assert.Equal(expectedIndex, sortedArray.IndexOf(number));

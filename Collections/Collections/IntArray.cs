@@ -6,7 +6,6 @@ namespace Collections
     {
         private const int Size = 4;
         private const int ResizeFactor = 2;
-
         private int[] array;
 
         public IntArray()
@@ -16,13 +15,13 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public int this[int index]
+        public virtual int this[int index]
         {
             get => this.array[index];
             set => this.array[index] = value;
         }
 
-        public void Add(int element)
+        public virtual void Add(int element)
         {
             this.ResizeArray();
 
@@ -47,7 +46,7 @@ namespace Collections
             return -1;
         }
 
-        public void Insert(int index, int element)
+        public virtual void Insert(int index, int element)
         {
             this.ResizeArray();
             this.Count++;
@@ -84,6 +83,11 @@ namespace Collections
             this.ShiftElementsLeft(index);
 
             this.Count--;
+        }
+
+        protected void SortArray()
+        {
+            Array.Sort(this.array, 0, this.Count);
         }
 
         private void ResizeArray()
