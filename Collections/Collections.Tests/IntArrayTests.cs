@@ -25,7 +25,7 @@ namespace Collections.Tests
         {
             array.Add(1);
             array.Add(2);
-            int count = array.Count();
+            int count = array.Count;
 
             Assert.Equal(2, count);
         }
@@ -93,7 +93,7 @@ namespace Collections.Tests
 
             array.Clear();
 
-            Assert.Equal(0, array.Count());
+            Assert.Equal(0, array.Count);
         }
 
         [Fact]

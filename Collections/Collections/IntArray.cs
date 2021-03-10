@@ -8,28 +8,24 @@ namespace Collections
         private const int ResizeFactor = 2;
 
         private int[] array;
-        private int count = 0;
 
         public IntArray()
         {
             this.array = new int[Size];
         }
 
+        public int Count { get; private set; }
+
         public void Add(int element)
         {
             this.ResizeArray();
 
-            this.array[this.count++] = element;
-        }
-
-        public int Count()
-        {
-            return this.count;
+            this.array[this.Count++] = element;
         }
 
         public int? Element(int index)
         {
-            if (index < 0 || index > this.count - 1)
+            if (index < 0 || index > this.Count - 1)
             {
                 return null;
             }
@@ -49,7 +45,7 @@ namespace Collections
 
         public int IndexOf(int element)
         {
-            for (int i = 0; i < this.count; i++)
+            for (int i = 0; i < this.Count; i++)
             {
                 if (this.array[i] == element)
                 {
@@ -63,7 +59,7 @@ namespace Collections
         public void Insert(int index, int element)
         {
             this.ResizeArray();
-            this.count++;
+            this.Count++;
 
             this.ShiftElementsRight(index);
 
@@ -72,7 +68,7 @@ namespace Collections
 
         public void Clear()
         {
-            this.count = 0;
+            this.Count = 0;
         }
 
         public void Remove(int element)
@@ -89,19 +85,19 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
-            if (index < 0 || index > this.count - 1)
+            if (index < 0 || index > this.Count - 1)
             {
                 return;
             }
 
             this.ShiftElementsLeft(index);
 
-            this.count--;
+            this.Count--;
         }
 
         private void ResizeArray()
         {
-            if (this.count == this.array.Length)
+            if (this.Count == this.array.Length)
             {
                 Array.Resize(ref this.array, this.array.Length * ResizeFactor);
             }
@@ -109,7 +105,7 @@ namespace Collections
 
         private void ShiftElementsRight(int index)
         {
-            for (int i = this.count - 1; i > index; i--)
+            for (int i = this.Count - 1; i > index; i--)
             {
                 this.array[i] = this.array[i - 1];
             }
@@ -117,7 +113,7 @@ namespace Collections
 
         private void ShiftElementsLeft(int index)
         {
-            while (index < this.count - 1)
+            while (index < this.Count - 1)
             {
                 this.array[index] = this.array[++index];
             }
