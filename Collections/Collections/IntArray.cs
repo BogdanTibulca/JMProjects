@@ -16,26 +16,17 @@ namespace Collections
 
         public int Count { get; private set; }
 
+        public int this[int index]
+        {
+            get => this.array[index];
+            set => this.array[index] = value;
+        }
+
         public void Add(int element)
         {
             this.ResizeArray();
 
             this.array[this.Count++] = element;
-        }
-
-        public int? Element(int index)
-        {
-            if (index < 0 || index > this.Count - 1)
-            {
-                return null;
-            }
-
-            return this.array[index];
-        }
-
-        public void SetElement(int index, int element)
-        {
-            this.array[index] = element;
         }
 
         public bool Contains(int element)
