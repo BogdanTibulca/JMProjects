@@ -4,13 +4,15 @@ namespace Collections
 {
     public class IntArray
     {
+        private const int Size = 4;
+        private const int ResizeFactor = 2;
+
         private int[] array;
         private int count = 0;
-        private int size = 4;
 
         public IntArray()
         {
-            this.array = new int[this.size];
+            this.array = new int[Size];
         }
 
         public void Add(int element)
@@ -42,15 +44,7 @@ namespace Collections
 
         public bool Contains(int element)
         {
-            for (int i = 0; i < this.count; i++)
-            {
-                if (this.array[i] == element)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return this.IndexOf(element) != -1;
         }
 
         public int IndexOf(int element)
@@ -68,19 +62,10 @@ namespace Collections
 
         public void Insert(int index, int element)
         {
-            if (index < 0 || index > this.size)
-            {
-                Console.WriteLine("Invalid index");
-                return;
-            }
-
             this.ResizeArray();
             this.count++;
 
-            for (int i = this.count - 1; i > index; i--)
-            {
-                this.array[i] = this.array[i - 1];
-            }
+            this.ShiftElementsRight(index);
 
             this.array[index] = element;
         }
@@ -88,8 +73,6 @@ namespace Collections
         public void Clear()
         {
             this.count = 0;
-            this.size = 4;
-            Array.Resize(ref this.array, this.size);
         }
 
         public void Remove(int element)
@@ -101,12 +84,7 @@ namespace Collections
                 return;
             }
 
-            for (int i = firstOccurrence; i < this.count - 1; i++)
-            {
-                this.array[i] = this.array[i + 1];
-            }
-
-            this.count--;
+            this.RemoveAt(firstOccurrence);
         }
 
         public void RemoveAt(int index)
@@ -116,20 +94,32 @@ namespace Collections
                 return;
             }
 
-            while (index < this.count - 1)
-            {
-                this.array[index] = this.array[++index];
-            }
+            this.ShiftElementsLeft(index);
 
             this.count--;
         }
 
         private void ResizeArray()
         {
-            if (this.count == this.size)
+            if (this.count == this.array.Length)
             {
-                this.size *= 2;
-                Array.Resize(ref this.array, this.size);
+                Array.Resize(ref this.array, this.array.Length * ResizeFactor);
+            }
+        }
+
+        private void ShiftElementsRight(int index)
+        {
+            for (int i = this.count - 1; i > index; i--)
+            {
+                this.array[i] = this.array[i - 1];
+            }
+        }
+
+        private void ShiftElementsLeft(int index)
+        {
+            while (index < this.count - 1)
+            {
+                this.array[index] = this.array[++index];
             }
         }
     }
