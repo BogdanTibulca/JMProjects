@@ -36,13 +36,13 @@ namespace Collections.Tests
             sortedArray.Add(6);
             sortedArray.Add(8);
 
-            int newValue = 3;
+            int newValue = 10;
 
             sortedArray[2] = newValue;
 
-            Assert.Equal(newValue, sortedArray[0]);
-            Assert.Equal(5, sortedArray[1]);
-            Assert.Equal(6, sortedArray[2]);
+            Assert.Equal(5, sortedArray[0]);
+            Assert.Equal(6, sortedArray[1]);
+            Assert.Equal(newValue, sortedArray[2]);
         }
 
         [Theory]
@@ -78,14 +78,14 @@ namespace Collections.Tests
             sortedArray.Add(30);
             sortedArray.Add(40);
 
-            sortedArray.Insert(1, 8);
-            sortedArray.Insert(0, 50);
+            sortedArray.Insert(0, 8);
+            sortedArray.Insert(3, 35);
 
             Assert.Equal(8, sortedArray[0]);
             Assert.Equal(10, sortedArray[1]);
             Assert.Equal(30, sortedArray[2]);
-            Assert.Equal(40, sortedArray[3]);
-            Assert.Equal(50, sortedArray[4]);
+            Assert.Equal(35, sortedArray[3]);
+            Assert.Equal(40, sortedArray[4]);
         }
 
         [Fact]

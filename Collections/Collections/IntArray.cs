@@ -4,9 +4,9 @@ namespace Collections
 {
     public class IntArray
     {
+        protected int[] array;
         private const int Size = 4;
         private const int ResizeFactor = 2;
-        private int[] array;
 
         public IntArray()
         {
