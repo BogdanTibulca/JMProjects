@@ -16,7 +16,7 @@ namespace Collections.Tests
 
             Assert.Equal(1, objArr[0]);
             Assert.True(objArr[1].Equals("a string"));
-            Assert.True(objArr[2]);
+            Assert.Equal(true, objArr[2]);
             Assert.Equal('c', objArr[3]);
         }
 
@@ -42,7 +42,7 @@ namespace Collections.Tests
             objArr[2] = false;
 
             Assert.True(objArr[1].Equals("new string"));
-            Assert.False(objArr[2]);
+            Assert.Equal(false, objArr[2]);
         }
 
         [Theory]
@@ -95,9 +95,9 @@ namespace Collections.Tests
             objArr.Insert(1, "March");
 
             Assert.Equal('a', objArr[0]);
-            Assert.Equal(22, objArr[1]);
-            Assert.False(objArr[2]);
-            Assert.True(objArr[3].Equals("March"));
+            Assert.True(objArr[1].Equals("March"));
+            Assert.Equal(22, objArr[2]);
+            Assert.Equal(false, objArr[3]);
         }
 
         [Fact]
@@ -125,7 +125,7 @@ namespace Collections.Tests
 
             Assert.Equal(123, objArr[0]);
             Assert.True(objArr[1].Equals("a string"));
-            Assert.False(objArr[2]);
+            Assert.Equal(false, objArr[2]);
         }
 
         [Fact]
@@ -140,7 +140,7 @@ namespace Collections.Tests
 
             Assert.Equal(123, objArr[0]);
             Assert.True(objArr[1].Equals("a string"));
-            Assert.False(objArr[2]);
+            Assert.Equal(false, objArr[2]);
         }
     }
 }
