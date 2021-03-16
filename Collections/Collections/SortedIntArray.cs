@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Collections
+﻿namespace Collections
 {
     public class SortedIntArray : IntArray
     {
@@ -18,7 +16,7 @@ namespace Collections
         public override void Add(int element)
         {
             base.Add(element);
-            Array.Sort(this.array, 0, this.Count);
+            this.SortIntArray();
         }
 
         public override void Insert(int index, int element)
@@ -33,15 +31,15 @@ namespace Collections
         {
             if (index == 0)
             {
-                return element <= this.array[1];
+                return element <= base[1];
             }
 
             if (index == this.Count - 1)
             {
-                return element >= this.array[index - 1];
+                return element >= base[index - 1];
             }
 
-            return this.array[index - 1] <= element && element <= this.array[index + 1];
+            return base[index - 1] <= element && element <= base[index + 1];
         }
 
         private bool CanInsert(int index, int element)
@@ -51,7 +49,24 @@ namespace Collections
                 return true;
             }
 
-            return this.array[index - 1] <= element && element <= this.array[index];
+            return base[index - 1] <= element && element <= base[index];
+        }
+
+        private void SortIntArray()
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                int num = base[i];
+                var currentIndex = i;
+
+                while (currentIndex > 0 && base[currentIndex - 1] > num)
+                {
+                    base[currentIndex] = base[currentIndex - 1];
+                    currentIndex--;
+                }
+
+                base[currentIndex] = num;
+            }
         }
     }
 }

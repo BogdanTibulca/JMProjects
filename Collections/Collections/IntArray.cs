@@ -4,9 +4,9 @@ namespace Collections
 {
     public class IntArray
     {
-        protected int[] array;
         private const int Size = 4;
         private const int ResizeFactor = 2;
+        private int[] array;
 
         public IntArray()
         {
@@ -83,11 +83,6 @@ namespace Collections
             this.ShiftElementsLeft(index);
 
             this.Count--;
-        }
-
-        protected void SortArray()
-        {
-            Array.Sort(this.array, 0, this.Count);
         }
 
         private void ResizeArray()
