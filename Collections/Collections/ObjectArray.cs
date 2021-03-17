@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections;
 
 namespace Collections
 {
-    public class ObjectArray
+    public class ObjectArray : IEnumerable
     {
         private const int Size = 4;
         private const int ResizeFactor = 2;
@@ -85,6 +86,11 @@ namespace Collections
             this.Count--;
         }
 
+        public IEnumerator GetEnumerator()
+        {
+            return new ObjectArrayEnum(this.array);
+        }
+
         private void ResizeArray()
         {
             if (this.Count == this.array.Length)
@@ -108,6 +114,5 @@ namespace Collections
                 this.array[index] = this.array[++index];
             }
         }
-
     }
 }
