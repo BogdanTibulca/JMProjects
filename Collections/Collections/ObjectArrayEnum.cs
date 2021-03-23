@@ -7,10 +7,12 @@ namespace Collections
     {
         private readonly object[] objectArr;
         private int position = -1;
+        private readonly int count;
 
-        public ObjectArrayEnum(object[] objectArr)
+        public ObjectArrayEnum(object[] objectArr, int count)
         {
             this.objectArr = objectArr;
+            this.count = count;
         }
 
         public object Current => this.objectArr[this.position];
@@ -19,7 +21,7 @@ namespace Collections
         {
             this.position++;
 
-            return this.position < this.objectArr.Length;
+            return this.position < this.count;
         }
 
         public void Reset()

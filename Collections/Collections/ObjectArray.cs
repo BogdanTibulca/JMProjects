@@ -88,7 +88,7 @@ namespace Collections
 
         public IEnumerator GetEnumerator()
         {
-            return new ObjectArrayEnum(this.array);
+            return new ObjectArrayEnum(this.array, this.Count);
         }
 
         private void ResizeArray()
