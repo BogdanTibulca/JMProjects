@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Collections
 {
-    public class ObjectArray : IEnumerable
+    public class ObjectArray
     {
         private const int Size = 4;
         private const int ResizeFactor = 2;
@@ -86,9 +86,20 @@ namespace Collections
             this.Count--;
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerable ObjectElements()
         {
-            return new ObjectArrayEnum(this.array, this.Count);
+            int position = 0;
+
+            foreach (object obj in this.array)
+            {
+                if (position == this.Count)
+                {
+                    yield break;
+                }
+
+                yield return obj;
+                position++;
+            }
         }
 
         private void ResizeArray()
