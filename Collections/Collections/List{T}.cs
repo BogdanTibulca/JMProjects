@@ -17,13 +17,13 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public T this[int index]
+        public virtual T this[int index]
         {
             get => this.array[index];
             set => this.array[index] = value;
         }
 
-        public void Add(T element)
+        public virtual void Add(T element)
         {
             this.ResizeArray();
 
@@ -48,7 +48,7 @@ namespace Collections
             return -1;
         }
 
-        public void Insert(int index, T element)
+        public virtual void Insert(int index, T element)
         {
             this.ResizeArray();
             this.Count++;

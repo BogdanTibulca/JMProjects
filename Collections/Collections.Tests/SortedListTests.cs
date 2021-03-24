@@ -70,11 +70,11 @@ namespace Collections.Tests
             intList.Insert(1, 1);
             intList.Insert(3, 3);
 
-            Assert.Equal(1, intList[0]);
-            Assert.Equal(2, intList[1]);
-            Assert.Equal(3, intList[2]);
-            Assert.Equal(4, intList[3]);
-            Assert.Equal(5, intList[4]);
+            Assert.Equal(0, intList[0]);
+            Assert.Equal(1, intList[1]);
+            Assert.Equal(2, intList[2]);
+            Assert.Equal(3, intList[3]);
+            Assert.Equal(4, intList[4]);
         }
 
         [Fact]
