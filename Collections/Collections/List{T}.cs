@@ -1,44 +1,45 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 
 namespace Collections
 {
-    public class ObjectArray : IEnumerable
+    public class List<T> : IEnumerable<T>
     {
         private const int Size = 4;
         private const int ResizeFactor = 2;
-        private object[] array;
+        private T[] array;
 
-        public ObjectArray()
+        public List()
         {
-            this.array = new object[Size];
+            this.array = new T[Size];
         }
 
         public int Count { get; private set; }
 
-        public object this[int index]
+        public T this[int index]
         {
             get => this.array[index];
             set => this.array[index] = value;
         }
 
-        public void Add(object obj)
+        public void Add(T element)
         {
             this.ResizeArray();
 
-            this.array[this.Count++] = obj;
+            this.array[this.Count++] = element;
         }
 
-        public bool Contains(object obj)
+        public bool Contains(T element)
         {
-            return this.IndexOf(obj) != -1;
+            return this.IndexOf(element) != -1;
         }
 
-        public int IndexOf(object obj)
+        public int IndexOf(T element)
         {
             for (int i = 0; i < this.Count; i++)
             {
-                if (this.array[i].Equals(obj))
+                if (this.array[i].Equals(element))
                 {
                     return i;
                 }
@@ -47,14 +48,14 @@ namespace Collections
             return -1;
         }
 
-        public void Insert(int index, object obj)
+        public void Insert(int index, T element)
         {
             this.ResizeArray();
             this.Count++;
 
             this.ShiftElementsRight(index);
 
-            this.array[index] = obj;
+            this.array[index] = element;
         }
 
         public void Clear()
@@ -62,9 +63,9 @@ namespace Collections
             this.Count = 0;
         }
 
-        public void Remove(object obj)
+        public void Remove(T element)
         {
-            int index = this.IndexOf(obj);
+            int index = this.IndexOf(element);
 
             if (index == -1)
             {
@@ -86,12 +87,17 @@ namespace Collections
             this.Count--;
         }
 
-        public IEnumerator GetEnumerator()
+        public IEnumerator<T> GetEnumerator()
         {
             for (int position = 0; position < this.Count; position++)
             {
                 yield return this.array[position];
             }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
         private void ResizeArray()
