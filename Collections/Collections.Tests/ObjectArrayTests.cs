@@ -4,7 +4,7 @@ namespace Collections.Tests
 {
     public class ObjectArrayTests
     {
-        private ObjectArray objArr = new ObjectArray();
+        private List<object> objArr = new List<object>();
 
         [Fact]
         public void Add_AddsAnObjectAtTheEndOfTheArray()
