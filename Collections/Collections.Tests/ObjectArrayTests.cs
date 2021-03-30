@@ -110,7 +110,7 @@ namespace Collections.Tests
 
             objArr.Clear();
 
-            Assert.Equal(0, objArr.Count);
+            Assert.Empty(objArr);
         }
 
         [Fact]
@@ -121,7 +121,11 @@ namespace Collections.Tests
             objArr.Add('c');
             objArr.Add(false);
 
-            objArr.Remove('c');
+            bool removed = objArr.Remove('c');
+            bool notValid = objArr.Remove(2);
+
+            Assert.True(removed);
+            Assert.False(notValid);
 
             Assert.Equal(123, objArr[0]);
             Assert.True(objArr[1].Equals("a string"));
@@ -141,6 +145,23 @@ namespace Collections.Tests
             Assert.Equal(123, objArr[0]);
             Assert.True(objArr[1].Equals("a string"));
             Assert.Equal(false, objArr[2]);
+        }
+
+        [Fact]
+        public void CopyTo_CopiesTheElementsOfTheCollectionToAGivenArray()
+        {
+            List<int> intList = new List<int> { 1,2,3 };
+
+            int[] newArr = new int[6];
+
+            intList.CopyTo(newArr, 2);
+
+            Assert.Equal(0, newArr[0]);
+            Assert.Equal(0, newArr[1]);
+            Assert.Equal(1, newArr[2]);
+            Assert.Equal(2, newArr[3]);
+            Assert.Equal(3, newArr[4]);
+            Assert.Equal(0, newArr[5]);
         }
     }
 }
