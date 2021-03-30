@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Collections
 {
-    public class List<T> : IEnumerable<T>
+    public class List<T> : IList<T>
     {
         private const int Size = 4;
         private const int ResizeFactor = 2;
@@ -17,29 +17,31 @@ namespace Collections
 
         public int Count { get; private set; }
 
+        public bool IsReadOnly => false;
+
         public virtual T this[int index]
         {
             get => this.array[index];
             set => this.array[index] = value;
         }
 
-        public virtual void Add(T element)
+        public virtual void Add(T item)
         {
             this.ResizeArray();
 
-            this.array[this.Count++] = element;
+            this.array[this.Count++] = item;
         }
 
-        public bool Contains(T element)
+        public bool Contains(T item)
         {
-            return this.IndexOf(element) != -1;
+            return this.IndexOf(item) != -1;
         }
 
-        public int IndexOf(T element)
+        public int IndexOf(T item)
         {
             for (int i = 0; i < this.Count; i++)
             {
-                if (this.array[i].Equals(element))
+                if (this.array[i].Equals(item))
                 {
                     return i;
                 }
@@ -48,14 +50,14 @@ namespace Collections
             return -1;
         }
 
-        public virtual void Insert(int index, T element)
+        public virtual void Insert(int index, T item)
         {
             this.ResizeArray();
             this.Count++;
 
             this.ShiftElementsRight(index);
 
-            this.array[index] = element;
+            this.array[index] = item;
         }
 
         public void Clear()
@@ -63,16 +65,17 @@ namespace Collections
             this.Count = 0;
         }
 
-        public void Remove(T element)
+        public bool Remove(T item)
         {
-            int index = this.IndexOf(element);
+            int index = this.IndexOf(item);
 
             if (index == -1)
             {
-                return;
+                return false;
             }
 
             this.RemoveAt(index);
+            return true;
         }
 
         public void RemoveAt(int index)
@@ -85,6 +88,14 @@ namespace Collections
             this.ShiftElementsLeft(index);
 
             this.Count--;
+        }
+
+        public void CopyTo(T[] array, int arrayIndex)
+        {
+            for (int i = 0; i < this.Count; i++)
+            {
+                array[arrayIndex++] = this[i];
+            }
         }
 
         public IEnumerator<T> GetEnumerator()
