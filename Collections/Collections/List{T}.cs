@@ -17,7 +17,7 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly => false;
+        public bool IsReadOnly { get; set; }
 
         public virtual T this[int index]
         {
@@ -27,6 +27,11 @@ namespace Collections
 
         public virtual void Add(T item)
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             this.ResizeArray();
 
             this.array[this.Count++] = item;
@@ -52,6 +57,11 @@ namespace Collections
 
         public virtual void Insert(int index, T item)
         {
+            if (index < 0 || index > this.Count)
+            {
+                throw new ArgumentOutOfRangeException("index", "The index should be between 0 and the items count.");
+            }
+
             this.ResizeArray();
             this.Count++;
 
@@ -62,11 +72,21 @@ namespace Collections
 
         public void Clear()
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             this.Count = 0;
         }
 
         public bool Remove(T item)
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
             int index = this.IndexOf(item);
 
             if (index == -1)
@@ -80,6 +100,16 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
+            if (this.IsReadOnly)
+            {
+                throw new NotSupportedException();
+            }
+
+            if (index < 0 || index > this.Count)
+            {
+                throw new ArgumentOutOfRangeException("index", "The index should be between 0 and the items count.");
+            }
+
             if (index < 0 || index > this.Count - 1)
             {
                 return;
@@ -92,6 +122,21 @@ namespace Collections
 
         public void CopyTo(T[] array, int arrayIndex)
         {
+            if (array == null)
+            {
+                throw new ArgumentNullException("array", "The destination array is null");
+            }
+
+            if (arrayIndex < 0)
+            {
+                throw new ArgumentOutOfRangeException("arrayIndex", "The index is less than 0.");
+            }
+
+            if (this.Count > array.Length - arrayIndex + 1)
+            {
+                throw new ArgumentException("There is not enough space to copy all the elements");
+            }
+
             for (int i = 0; i < this.Count; i++)
             {
                 array[arrayIndex++] = this[i];
