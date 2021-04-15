@@ -1,4 +1,5 @@
-﻿using Xunit;
+﻿using System;
+using Xunit;
 
 namespace Collections.Tests
 {
@@ -18,6 +19,14 @@ namespace Collections.Tests
             Assert.True(objArr[1].Equals("a string"));
             Assert.Equal(true, objArr[2]);
             Assert.Equal('c', objArr[3]);
+        }
+
+        [Fact]
+        public void Add_ListIsReadOnly_ThrowsException()
+        {
+            objArr.IsReadOnly = true;
+
+            Assert.Throws<NotSupportedException>(() => objArr.Add(32));
         }
 
         [Fact]
@@ -101,6 +110,22 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void Insert_IndexLowerThanZero_ThrowsException()
+        { 
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => objArr.Insert(-2, "invalid"));
+
+            Assert.Equal("The index should be between 0 and the items count. (Parameter 'index')", ex.Message);
+        }
+
+        [Fact]
+        public void Insert_IndexHigherThanCount_ThrowsException()
+        {
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => objArr.Insert(2, "invalid"));
+
+            Assert.Equal("The index should be between 0 and the items count. (Parameter 'index')", ex.Message);
+        }
+
+        [Fact]
         public void Clear_RemovesAllTheObjectsInTheArray()
         {
             objArr.Add(123);
@@ -111,6 +136,14 @@ namespace Collections.Tests
             objArr.Clear();
 
             Assert.Empty(objArr);
+        }
+
+        [Fact]
+        public void Clear_ListIsReadOnly_ThrowsException()
+        {
+            objArr.IsReadOnly = true;
+
+            Assert.Throws<NotSupportedException>(() => objArr.Clear());
         }
 
         [Fact]
@@ -133,6 +166,16 @@ namespace Collections.Tests
         }
 
         [Fact]
+        public void Remove_ListIsReadOnly_ThrowsException()
+        {
+            objArr.Add(23);
+            objArr.Add(24);
+            objArr.IsReadOnly = true;
+
+            Assert.Throws<NotSupportedException>(() => objArr.Remove(23));
+        }
+
+        [Fact]
         public void RemoveAt_RemovesTheObjectAtTheGivenPosition()
         {
             objArr.Add(123);
@@ -145,6 +188,37 @@ namespace Collections.Tests
             Assert.Equal(123, objArr[0]);
             Assert.True(objArr[1].Equals("a string"));
             Assert.Equal(false, objArr[2]);
+        }
+
+        [Fact]
+        public void RemoveAt_ListIsReadOnly_ThrowsException()
+        {
+            objArr.Add(10);
+            objArr.Add(20);
+            objArr.Add(30);
+            objArr.IsReadOnly = true;
+
+            Assert.Throws<NotSupportedException>(() => objArr.RemoveAt(1));
+        }
+
+        [Fact]
+        public void RemoveAt_IndexLowerThanZero_ThrowsException()
+        {
+            objArr.Add(1);
+            objArr.Add(2);
+            objArr.Add(3);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => objArr.RemoveAt(-2));
+
+            Assert.Equal("The index should be between 0 and the items count. (Parameter 'index')", ex.Message);
+        }
+
+        [Fact]
+        public void RemoveAt_IndexHigherThanCount_ThrowsException()
+        {
+            objArr.Add(1);
+            var ex = Assert.Throws<ArgumentOutOfRangeException>(() => objArr.RemoveAt(2));
+
+            Assert.Equal("The index should be between 0 and the items count. (Parameter 'index')", ex.Message);
         }
 
         [Fact]
@@ -162,6 +236,36 @@ namespace Collections.Tests
             Assert.Equal(2, newArr[3]);
             Assert.Equal(3, newArr[4]);
             Assert.Equal(0, newArr[5]);
+        }
+
+        [Fact]
+        public void CopyTo_DestinationArrayIsNull_ThrowsException()
+        {
+            List<int> intList = new List<int> { 1, 2, 3 };
+
+            int[] newArr = null;
+
+            Assert.Throws<ArgumentNullException>(() => intList.CopyTo(newArr, 0));
+        }
+
+        [Fact]
+        public void CopyTo_ArrayStartIndexIsLowerThanZero_ThrowsException()
+        {
+            List<int> intList = new List<int> { 1, 2, 3 };
+
+            int[] newArr = new int[6];
+
+            Assert.Throws<ArgumentOutOfRangeException>(() => intList.CopyTo(newArr, -2));
+        }
+
+        [Fact]
+        public void CopyTo_InsufficientSpaceToCopyAllTheElements_ThrowsException()
+        {
+            List<int> intList = new List<int> { 1, 2, 3, 4, 5 };
+
+            int[] newArr = new int[6];
+
+            Assert.Throws<ArgumentException>(() => intList.CopyTo(newArr, 5));
         }
     }
 }
