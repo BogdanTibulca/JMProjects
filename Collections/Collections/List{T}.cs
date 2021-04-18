@@ -17,7 +17,7 @@ namespace Collections
 
         public int Count { get; private set; }
 
-        public bool IsReadOnly { get; set; }
+        public bool IsReadOnly => false;
 
         public virtual T this[int index]
         {
@@ -27,11 +27,6 @@ namespace Collections
 
         public virtual void Add(T item)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException();
-            }
-
             this.ResizeArray();
 
             this.array[this.Count++] = item;
@@ -57,10 +52,7 @@ namespace Collections
 
         public virtual void Insert(int index, T item)
         {
-            if (index < 0 || index > this.Count)
-            {
-                throw new ArgumentOutOfRangeException("index", "The index should be between 0 and the items count.");
-            }
+            this.ValidateIndex(index);
 
             this.ResizeArray();
             this.Count++;
@@ -72,21 +64,11 @@ namespace Collections
 
         public void Clear()
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException();
-            }
-
             this.Count = 0;
         }
 
         public bool Remove(T item)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException();
-            }
-
             int index = this.IndexOf(item);
 
             if (index == -1)
@@ -100,19 +82,9 @@ namespace Collections
 
         public void RemoveAt(int index)
         {
-            if (this.IsReadOnly)
-            {
-                throw new NotSupportedException();
-            }
-
-            if (index < 0 || index > this.Count)
-            {
-                throw new ArgumentOutOfRangeException("index", "The index should be between 0 and the items count.");
-            }
-
             if (index < 0 || index > this.Count - 1)
             {
-                return;
+                throw new ArgumentOutOfRangeException("index", "The index should be between 0 and the items count.");
             }
 
             this.ShiftElementsLeft(index);
@@ -177,6 +149,14 @@ namespace Collections
             while (index < this.Count - 1)
             {
                 this.array[index] = this.array[++index];
+            }
+        }
+
+        private void ValidateIndex(int index)
+        {
+            if (index < 0 || index > this.Count)
+            {
+                throw new ArgumentOutOfRangeException("index", "The index should be between 0 and the items count.");
             }
         }
     }
