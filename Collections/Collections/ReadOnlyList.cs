@@ -50,7 +50,7 @@ namespace Collections
 
         public bool Contains(T item)
         {
-            return this.IndexOf(item) != -1;
+            return this.list.Contains(item);
         }
 
         public void CopyTo(T[] array, int arrayIndex)
@@ -60,10 +60,7 @@ namespace Collections
 
         public IEnumerator<T> GetEnumerator()
         {
-            for (int position = 0; position < this.Count; position++)
-            {
-                yield return this.list[position];
-            }
+            return this.list.GetEnumerator();
         }
 
         public int IndexOf(T item)
